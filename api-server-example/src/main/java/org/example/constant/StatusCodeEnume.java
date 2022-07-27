@@ -1,4 +1,4 @@
-package io.swen90007sm2.constant;
+package org.example.constant;
 
 /**
  * @author xiaotian

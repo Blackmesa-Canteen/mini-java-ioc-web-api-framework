@@ -2,7 +2,6 @@ package io.swen90007sm2.bean;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import io.swen90007sm2.constant.StatusCodeEnume;
 import org.apache.http.HttpStatus;
 
 import java.util.HashMap;
@@ -24,10 +23,11 @@ public class R extends HashMap<String, Object> {
     public static final String MSG = "msg";
     public static final String CODE = "code";
     public static final String DATA = "data";
+    public static final String OK = "Ok";
 
     public R() {
         put(CODE, HttpStatus.SC_OK);
-        put(MSG, StatusCodeEnume.SUCCESS.getMessage());
+        put(MSG, OK);
     }
 
     public static R error() {
