@@ -78,6 +78,5 @@ public class DbHelper {
     /**
      * delete
      */
-    public <T> boolean deleteEntity
 
 }

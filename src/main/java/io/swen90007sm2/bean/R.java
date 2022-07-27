@@ -11,6 +11,12 @@ import java.util.Map;
 /**
  * A util class for responding RESTful JSON data
  *
+ * {
+ *     code: 0
+ *     msg: "SUCCESS"
+ *     data: {some data object}
+ * }
+ *
  * @author xiaotian
  */
 public class R extends HashMap<String, Object> {
@@ -73,26 +79,20 @@ public class R extends HashMap<String, Object> {
     /**
      * parse the `data` key from the R map with designated type.
      * e.g. if you put("data", new Person()), use this method like getData(new TypeReference<MemberAddressVo>(Person) {});
-     *
-     * @param <T>
      */
     public <T> T getData(TypeReference<T> typeReference) {
         Object data = get(DATA);
         String jsonString = JSON.toJSONString(data);
-        T t = JSON.parseObject(jsonString, typeReference);
-        return t;
+        return JSON.parseObject(jsonString, typeReference);
     }
 
     /**
      * parse the any key from the R map with designated type.
      * e.g. if you put("person", new Person()), use this method like getData("person",new TypeReference<Person>() {});
-     *
-     * @param <T>
      */
     public <T> T getData(String key, TypeReference<T> typeReference) {
         Object data = get(key);
         String jsonString = JSON.toJSONString(data);
-        T t = JSON.parseObject(jsonString, typeReference);
-        return t;
+        return JSON.parseObject(jsonString, typeReference);
     }
 }

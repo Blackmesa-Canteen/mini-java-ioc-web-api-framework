@@ -20,7 +20,6 @@ public class ConfigFileReader {
     /*
      * jdbc
      */
-
     public static String getJdbcDriver() {
         return ConfigFileUtil.getString(CONFIG_FILE_PROPS, ConfigFileConstant.JDBC_DRIVER);
     }
@@ -42,20 +41,6 @@ public class ConfigFileReader {
      */
     public static String getBasePackage() {
         return ConfigFileUtil.getString(CONFIG_FILE_PROPS, ConfigFileConstant.APP_BASE_PACKAGE_NAME);
-    }
-
-    /**
-     * get application jsp path
-     */
-    public static String getJspPath() {
-        return ConfigFileUtil.getString(CONFIG_FILE_PROPS, ConfigFileConstant.APP_JSP_PATH, "/WEB-INF/view/");
-    }
-
-    /**
-     * get application asset path
-     */
-    public static String getAssetPath() {
-        return ConfigFileUtil.getString(CONFIG_FILE_PROPS, ConfigFileConstant.APP_ASSET_PATH, "/asset/");
     }
 
     /**

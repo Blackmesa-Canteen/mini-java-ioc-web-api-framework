@@ -12,8 +12,6 @@ public interface ConfigFileConstant {
 
     // filepath
     String APP_BASE_PACKAGE_NAME = "io.swen90007sm2.app.base_package";
-    String APP_JSP_PATH = "io.swen90007sm2.app.jsp_path";
-    String APP_ASSET_PATH = "io.swen90007sm2.app.asset_path";
 
     // database
     String JDBC_DRIVER = "io.swen90007sm2.jdbc.driver";

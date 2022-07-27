@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class RequestHelper {
 
-    public static RequestParam createParamWithServletRequest(HttpServletRequest request) throws IOException {
+    public static RequestParam genParamWithServletRequest(HttpServletRequest request) {
         Enumeration<String> parameterNames = request.getParameterNames();
         // if there is no param in this request
         if (!parameterNames.hasMoreElements()) return null;
