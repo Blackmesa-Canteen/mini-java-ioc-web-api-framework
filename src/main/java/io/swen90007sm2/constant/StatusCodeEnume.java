@@ -5,7 +5,7 @@ package io.swen90007sm2.constant;
  */
 public enum StatusCodeEnume {
 
-    SUCCESS(0, "Success"),
+    SUCCESS(200, "Ok"),
     UNKNOW_EXCEPTION(10000,"Unknown exception."),
     VAILDATION_EXCEPTION(10001,"Param format exception."),
     TO_MANY_REQUEST(10002,"Too many requests, please try again"),

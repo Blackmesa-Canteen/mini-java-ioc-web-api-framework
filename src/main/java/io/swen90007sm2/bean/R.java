@@ -26,7 +26,7 @@ public class R extends HashMap<String, Object> {
     public static final String DATA = "data";
 
     public R() {
-        put(CODE, StatusCodeEnume.SUCCESS.getCode());
+        put(CODE, HttpStatus.SC_OK);
         put(MSG, StatusCodeEnume.SUCCESS.getMessage());
     }
 
