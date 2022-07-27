@@ -8,7 +8,7 @@ package io.swen90007sm2.constant;
  */
 public interface ConfigFileConstant {
     
-    String CONFIG_FILE_NAME = "app.properties";
+    String CONFIG_FILE_NAME = "application.properties";
 
     // filepath
     String APP_BASE_PACKAGE_NAME = "io.swen90007sm2.app.base_package";

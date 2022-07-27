@@ -17,7 +17,9 @@ import java.io.PrintWriter;
 import java.lang.reflect.Method;
 
 /**
- * servlet need to be runned at the start of the application
+ * servlet need to be run at the start of the application
+ * This is a RESTful JSON servlet
+ * @author xiaotian
  */
 @WebServlet(urlPatterns = "/*", loadOnStartup = 0)
 public class MyDispatcherServlet extends HttpServlet {
@@ -25,13 +27,14 @@ public class MyDispatcherServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String requestMethod = req.getMethod().toUpperCase();
-        String requestPath = req.getPathInfo();
+        String requestPath = req.getServletPath();
+        req.setCharacterEncoding("utf-8");
 
         // handle the case: "/contextXXX/userList"
-        String[] splits = requestPath.split("/");
-        if (splits.length > 2) {
-            requestPath = "/" + splits[2];
-        }
+//        String[] splits = requestPath.split("/");
+//        if (splits.length > 2) {
+//            requestPath = "/" + splits[2];
+//        }
 
         // map worker based on request
         Worker worker = HandlerManager.getWorker(requestMethod, requestPath);
@@ -45,9 +48,9 @@ public class MyDispatcherServlet extends HttpServlet {
             Object methodCallingResult;
             // call the specific method to handle the request
             if (requestParam != null && !requestParam.isEmptyParam()) {
-                methodCallingResult = ReflectionUtil.invokeMethod(handlerBean, handlerMethod);
-            } else {
                 methodCallingResult = ReflectionUtil.invokeMethod(handlerBean, handlerMethod, requestParam);
+            } else {
+                methodCallingResult = ReflectionUtil.invokeMethod(handlerBean, handlerMethod);
             }
 
             // response to the client

@@ -7,6 +7,11 @@ import org.apache.catalina.LifecycleException;
 import org.apache.catalina.core.StandardContext;
 import org.apache.catalina.startup.Tomcat;
 
+/**
+ * embedded Tomcat server
+ *
+ * @author xiaotian
+ */
 public class TomcatServer {
     private Tomcat tomcat;
     private int portNumber = 8088;

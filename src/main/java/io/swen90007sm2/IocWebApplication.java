@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 
 /**
  * embed tomcat server that runs the whole framework
+ *
+ * @author xiaotian
  */
 public class IocWebApplication {
 
@@ -19,6 +21,7 @@ public class IocWebApplication {
      */
     public static void run(int portNumber) {
 
+        LOGGER.info("SWEN90007 mini Java Ioc web app");
         LOGGER.info("Start to run the IoC Web Application.");
 
         // load core modules

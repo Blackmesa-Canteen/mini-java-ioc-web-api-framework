@@ -43,7 +43,7 @@ public class HandlerManager {
         Handler handlerAnnotationObj = handlerClass.getAnnotation(Handler.class);
         String rootPathFromAnno = handlerAnnotationObj.path();
         if (StringUtils.isNotEmpty(rootPathFromAnno)) {
-            requestRootPath += rootPathFromAnno + "/";
+            requestRootPath += rootPathFromAnno;
         }
 
 

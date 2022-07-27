@@ -35,7 +35,7 @@ public class InjectionHelper {
                 Object beanInstance = next.getValue();
 
                 // get fields with reflection, then ready to inject
-                Field[] fields = clazz.getFields();
+                Field[] fields = clazz.getDeclaredFields();
                 if (ArrayUtils.isNotEmpty(fields)) {
                     injectBeanToFields(beanMap, beanInstance, fields);
                 }
