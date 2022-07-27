@@ -1,4 +1,4 @@
-package io.swen90007sm2.core;
+package io.swen90007sm2;
 
 public class ApplicationServerRunner {
 }

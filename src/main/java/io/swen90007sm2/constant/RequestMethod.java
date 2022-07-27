@@ -1,4 +1,4 @@
-package io.swen90007sm2.core.constant;
+package io.swen90007sm2.constant;
 
 /**
  * basic RESTful request methods
@@ -6,5 +6,5 @@ package io.swen90007sm2.core.constant;
  * @author Xiaotian
  */
 public enum RequestMethod {
-    GET, HEAD, POST, PUT, DELETE
+    GET, POST, PUT, DELETE
 }

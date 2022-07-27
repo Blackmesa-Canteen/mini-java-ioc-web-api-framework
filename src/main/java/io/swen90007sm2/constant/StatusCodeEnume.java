@@ -1,4 +1,4 @@
-package io.swen90007sm2.core.constant;
+package io.swen90007sm2.constant;
 
 /**
  * @author xiaotian

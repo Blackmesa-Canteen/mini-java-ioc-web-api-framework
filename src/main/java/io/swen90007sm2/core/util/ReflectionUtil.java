@@ -65,4 +65,10 @@ public class ReflectionUtil {
         }
     }
 
+    /**
+     * get all methods from this class
+     */
+    public static Method[] getMethods(Class<?> clazz) {
+        return clazz.getDeclaredMethods();
+    }
 }

@@ -6,7 +6,7 @@
  * 版权所有，侵权必究！
  */
 
-package io.swen90007sm2.core.exception;
+package io.swen90007sm2.exception;
 
 /**
  * customized Exception

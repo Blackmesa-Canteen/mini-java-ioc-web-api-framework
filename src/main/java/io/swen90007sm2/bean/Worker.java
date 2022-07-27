@@ -1,4 +1,4 @@
-package io.swen90007sm2.core.bean;
+package io.swen90007sm2.bean;
 
 import java.lang.reflect.Method;
 

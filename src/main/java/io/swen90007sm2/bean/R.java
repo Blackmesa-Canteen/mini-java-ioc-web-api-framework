@@ -1,8 +1,8 @@
-package io.swen90007sm2.core.bean;
+package io.swen90007sm2.bean;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import io.swen90007sm2.core.constant.StatusCodeEnume;
+import io.swen90007sm2.constant.StatusCodeEnume;
 import org.apache.http.HttpStatus;
 
 import java.util.HashMap;

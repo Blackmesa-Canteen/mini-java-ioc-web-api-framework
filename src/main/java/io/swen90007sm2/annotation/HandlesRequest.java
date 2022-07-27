@@ -1,6 +1,6 @@
-package io.swen90007sm2.core.annotation;
+package io.swen90007sm2.annotation;
 
-import io.swen90007sm2.core.constant.RequestMethod;
+import io.swen90007sm2.constant.RequestMethod;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -14,12 +14,12 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface RequestMapper {
+public @interface HandlesRequest {
     /**
      * Request URL/Path
      * @return String
      */
-    String value() default "";
+    String path() default "";
 
     /**
      * Request method, such as GET, POST and so on
