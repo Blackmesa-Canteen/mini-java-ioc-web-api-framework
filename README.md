@@ -1,2 +1,2 @@
-# mini-java-ioc-web-app
+# mini-java-ioc-web-framework
  
