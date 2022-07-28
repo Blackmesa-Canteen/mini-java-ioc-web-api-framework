@@ -1,14 +1,7 @@
 package io.swen90007sm2.framework.core.web.servlet;
 
-import com.alibaba.fastjson.JSON;
-import io.swen90007sm2.framework.bean.R;
 import io.swen90007sm2.framework.bean.RequestSessionBean;
-import io.swen90007sm2.framework.bean.Worker;
-import io.swen90007sm2.framework.common.constant.RequestMethod;
-import io.swen90007sm2.framework.core.ioc.BeanManager;
 import io.swen90007sm2.framework.core.mvc.HandlerManager;
-import io.swen90007sm2.framework.core.mvc.RequestHelper;
-import io.swen90007sm2.framework.common.util.ReflectionUtil;
 import io.swen90007sm2.framework.core.web.factory.RequestHandlerFactory;
 import io.swen90007sm2.framework.core.web.handler.IRequestHandler;
 import org.slf4j.Logger;
@@ -19,8 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;

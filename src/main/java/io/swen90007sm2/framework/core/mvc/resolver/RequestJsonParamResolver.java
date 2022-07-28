@@ -8,6 +8,11 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Parameter;
 
+/**
+ * convert incoming request json body into a specific entity as the same as parameter type
+ *
+ * @author xiaotian
+ */
 public class RequestJsonParamResolver implements IParameterResolver {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RequestJsonParamResolver.class);

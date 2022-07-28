@@ -20,23 +20,26 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.*;
 
+/**
+ * handling Get request, returns json
+ *
+ * @author xiatian
+ */
 public class GetRequestHandler implements IRequestHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GetRequestHandler.class);
 
     @Override
     public void handle(HttpServletRequest req, HttpServletResponse resp, RequestSessionBean requestSessionBean) {
-        String requestPath = req.getServletPath();
 
-//        Map<String, String> queryParamMap = getQueryParams(requestPath);
-
+        // get query parameters
         Enumeration<String> parameterNames = req.getParameterNames();
         Map<String, String> queryParameterMap = new HashMap<>();
         while (parameterNames.hasMoreElements()) {
             String queryParamName = parameterNames.nextElement();
             queryParameterMap.put(queryParamName, req.getParameter(queryParamName));
         }
-
+        // init a query parameter map to hold incoming qurey parameter strings
         requestSessionBean.setQueryParameterMap(queryParameterMap);
 
         Worker worker = requestSessionBean.getWorkerNeeded();
@@ -46,7 +49,10 @@ public class GetRequestHandler implements IRequestHandler {
             Parameter[] targetMethodParameters = targetMethod.getParameters();
 
             List<Object> paramObjList = new ArrayList<>();
+
+            // traverse params in handler method, then generate correct param object for method calling
             for (Parameter param : targetMethodParameters) {
+                // get correct resolver type for the param
                 IParameterResolver parameterResolver = ParameterResolverFactory.get(param);
                 if (parameterResolver != null) {
                     Object paramObj = parameterResolver.resolve(requestSessionBean, param);

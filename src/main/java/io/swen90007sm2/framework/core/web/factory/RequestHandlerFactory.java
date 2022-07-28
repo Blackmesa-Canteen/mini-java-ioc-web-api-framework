@@ -16,10 +16,10 @@ public class RequestHandlerFactory {
     private static final Map<String, IRequestHandler> REQUEST_MAP = new HashMap<>();
 
     static {
-        REQUEST_MAP .put(RequestMethod.GET.name(), new GetRequestHandler());
-        REQUEST_MAP .put(RequestMethod.POST.name(), new PostRequestHandler());
-        REQUEST_MAP .put(RequestMethod.PUT.name(), new PostRequestHandler());
-        REQUEST_MAP .put(RequestMethod.DELETE.name(), new PostRequestHandler());
+        REQUEST_MAP.put(RequestMethod.GET.name(), new GetRequestHandler());
+        REQUEST_MAP.put(RequestMethod.POST.name(), new PostRequestHandler());
+        REQUEST_MAP.put(RequestMethod.PUT.name(), new PostRequestHandler());
+        REQUEST_MAP.put(RequestMethod.DELETE.name(), new PostRequestHandler());
     }
 
     public static IRequestHandler get(String requestMethodText) {

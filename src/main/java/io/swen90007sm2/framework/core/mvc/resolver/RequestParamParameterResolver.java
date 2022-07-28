@@ -18,6 +18,7 @@ public class RequestParamParameterResolver implements IParameterResolver {
         RequestParam requestParamAnno = parameter.getDeclaredAnnotation(RequestParam.class);
         String targetParamName = requestParamAnno.value();
 
+        // this map has been put values from the incoming request.
         Map<String, String> queryParameterMap = requestSessionBean.getQueryParameterMap();
         String targetParamValue = queryParameterMap.get(targetParamName);
 

@@ -25,6 +25,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * handling POST, PUT, DELETE request, returns json
+ *
+ * @author xiatian
+ */
 public class PostRequestHandler implements IRequestHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PostRequestHandler.class);
