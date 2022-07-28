@@ -30,6 +30,7 @@ public class AppContextLoader {
                 HandlerManager.class
         };
 
+        // run static blocks one by one
         for (Class<?> clazz : classLoadList) {
             ClassLoadUtil.loadClass(clazz.getName());
         }

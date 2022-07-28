@@ -53,6 +53,9 @@ public class MyDispatcherServlet extends HttpServlet {
         }
     }
 
+    /**
+     * generate the request session bean, holds some information including method, and incoming request's params.
+     */
     public static RequestSessionBean genRequestSessionBean(String requestMethodText, String requestPath) {
         RequestSessionBean requestSessionBean = new RequestSessionBean();
 
@@ -75,6 +78,7 @@ public class MyDispatcherServlet extends HttpServlet {
 
         return requestSessionBean;
     }
+
 
     private static Map<String, String> parseIncomingPath2pathVariableMap(String requestPath, String url) {
         String[] requestParams = requestPath.split("/");
