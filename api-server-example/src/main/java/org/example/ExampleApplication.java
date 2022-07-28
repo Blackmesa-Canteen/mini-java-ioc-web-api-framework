@@ -1,10 +1,10 @@
 package org.example;
 
-import io.swen90007sm2.IocWebApplication;
+import io.swen90007sm2.framework.IocWebApiApplication;
 
 public class ExampleApplication {
 
     public static void main(String[] args) {
-        IocWebApplication.run(8088);
+        IocWebApiApplication.run(8088);
     }
 }

@@ -1,9 +1,9 @@
 package org.example.handler;
 
-import io.swen90007sm2.annotation.*;
-import io.swen90007sm2.bean.R;
-import io.swen90007sm2.bean.RequestParam;
-import io.swen90007sm2.constant.RequestMethod;
+import io.swen90007sm2.framework.annotation.*;
+import io.swen90007sm2.framework.bean.R;
+import io.swen90007sm2.framework.bean.RequestParam;
+import io.swen90007sm2.framework.constant.RequestMethod;
 import org.example.entity.User;
 import org.example.service.IUserService;
 

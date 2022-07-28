@@ -1,30 +1,30 @@
 package org.example.service.impl;
 
-import io.swen90007sm2.bean.R;
+import org.example.dao.IUsedDao;
 import org.example.entity.User;
 import org.example.service.IUserService;
-import io.swen90007sm2.annotation.*;
+import io.swen90007sm2.framework.annotation.*;
 
 @Service
 public class UserService implements IUserService {
 
+    @AutoInjected
+    IUsedDao userDao;
+
     @Override
     public User getUserById(Long id) {
-        User demoData = new User();
-        demoData.setId(id);
-        demoData.setAge(23);
-        demoData.setName("abc");
+        User user = userDao.findUserById(id);
 
-        return demoData;
+        return user;
     }
 
     @Override
     public boolean addUser(User user) {
-        return true;
+        return userDao.addUser(user);
     }
 
     @Override
     public boolean updateUserById(Long id, User user) {
-        return false;
+        return userDao.updateUserById(id, user);
     }
 }

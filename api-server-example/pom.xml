@@ -15,8 +15,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.swen90007sm2</groupId>
-            <artifactId>mini-java-ioc-web-framework</artifactId>
+            <groupId>io.swen90007sm2.framework</groupId>
+            <artifactId>mini-java-ioc-web-api-framework</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
