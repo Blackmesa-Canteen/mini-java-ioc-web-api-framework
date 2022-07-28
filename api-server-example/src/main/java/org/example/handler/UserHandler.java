@@ -1,8 +1,7 @@
 package org.example.handler;
 
 import io.swen90007sm2.framework.annotation.ioc.AutoInjected;
-import io.swen90007sm2.framework.annotation.mvc.Handler;
-import io.swen90007sm2.framework.annotation.mvc.HandlesRequest;
+import io.swen90007sm2.framework.annotation.mvc.*;
 import io.swen90007sm2.framework.bean.R;
 import io.swen90007sm2.framework.bean.RequestSessionBean;
 import io.swen90007sm2.framework.common.constant.RequestMethod;
@@ -15,25 +14,29 @@ public class UserHandler {
     @AutoInjected
     private IUserBlo userService;
 
-    @HandlesRequest(path = "/user", method = RequestMethod.GET)
-    public R getUser(RequestSessionBean param) {
-        Long id = Long.parseLong((String) param.getRequestParamMap().get("id"));
+    @HandlesRequest(path = "/user/{id}", method = RequestMethod.GET)
+    public R getUser(@PathVariable("id") Long id) {
+
         User user = userService.getUserById(id);
+        return R.ok().setData(user);
+    }
+
+    @HandlesRequest(path = "/user", method = RequestMethod.GET)
+    public R getUser(@RequestParam(value = "name") String name, @RequestParam("id") Long id, @RequestParam("age") Integer age) {
+        User user = new User(id, name, age);
 
         return R.ok().setData(user);
     }
 
     @HandlesRequest(path = "/user", method = RequestMethod.POST)
-    public R addUser(RequestSessionBean param) {
-        // TODO 轉型問題
-//        Long id = Long.parseLong((String) param.getRequestParamMap().get("id"));
-        Long id = 233L;
-        String name = (String) param.getRequestParamMap().get("name");
-        int age = (int) param.getRequestParamMap().get("age");
+    public R addUser(@RequestJsonParam User user) {
+        boolean res = userService.addUser(user);
 
-        User user = new User(id, name, age);
-
-        return R.ok().setData(user);
+        if (res) {
+            return R.ok().setData(user);
+        } else {
+            return R.error("err");
+        }
     }
 
 }

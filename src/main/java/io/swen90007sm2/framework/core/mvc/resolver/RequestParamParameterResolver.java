@@ -18,7 +18,6 @@ public class RequestParamParameterResolver implements IParameterResolver {
         RequestParam requestParamAnno = parameter.getDeclaredAnnotation(RequestParam.class);
         String targetParamName = requestParamAnno.value();
 
-        // TODO map 没初始化
         Map<String, String> queryParameterMap = requestSessionBean.getQueryParameterMap();
         String targetParamValue = queryParameterMap.get(targetParamName);
 

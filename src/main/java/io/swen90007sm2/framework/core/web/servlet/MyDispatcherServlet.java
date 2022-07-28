@@ -4,10 +4,13 @@ import com.alibaba.fastjson.JSON;
 import io.swen90007sm2.framework.bean.R;
 import io.swen90007sm2.framework.bean.RequestSessionBean;
 import io.swen90007sm2.framework.bean.Worker;
+import io.swen90007sm2.framework.common.constant.RequestMethod;
 import io.swen90007sm2.framework.core.ioc.BeanManager;
 import io.swen90007sm2.framework.core.mvc.HandlerManager;
 import io.swen90007sm2.framework.core.mvc.RequestHelper;
 import io.swen90007sm2.framework.common.util.ReflectionUtil;
+import io.swen90007sm2.framework.core.web.factory.RequestHandlerFactory;
+import io.swen90007sm2.framework.core.web.handler.IRequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,6 +28,7 @@ import java.util.regex.Pattern;
 /**
  * servlet need to be run at the start of the application
  * This is a RESTful JSON servlet
+ *
  * @author xiaotian
  */
 @WebServlet(urlPatterns = "/*", loadOnStartup = 0)
@@ -49,61 +53,34 @@ public class MyDispatcherServlet extends HttpServlet {
         // generate request-response session bean for this new serving session
         RequestSessionBean sessionBean = genRequestSessionBean(requestMethod, requestPath);
 
+        IRequestHandler requestHandler = RequestHandlerFactory.get(requestMethod);
         if (sessionBean.getWorkerNeeded() != null) {
-            Class<?> handlerClass = worker.getHandlerClazz();
-            Object handlerBean = BeanManager.getBean(handlerClass);
-
-            RequestSessionBean requestSessionBean = RequestHelper.genParamWithServletRequest(req);
-            Method handlerMethod = worker.getHandlerMethod();
-
-            Object methodCallingResult;
-            // call the specific method to handle the request
-            if (requestSessionBean != null && !requestSessionBean.isEmptyParam()) {
-                methodCallingResult = ReflectionUtil.invokeMethod(handlerBean, handlerMethod, params);
-            } else {
-                methodCallingResult = ReflectionUtil.invokeMethod(handlerBean, handlerMethod);
-            }
-
-            // response to the client
-            handleRestfulResponse((R) methodCallingResult, resp);
+            // handle the request
+            requestHandler.handle(req, resp, sessionBean);
         } else {
             LOGGER.info("mismatched a request: [" + requestMethod + "] " + requestPath);
-        }
-    }
-
-    /**
-     * returns JSON
-     */
-    private void handleRestfulResponse(R responseObj, HttpServletResponse response) throws IOException {
-        if (responseObj != null) {
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            PrintWriter writer = response.getWriter();
-            String json = JSON.toJSON(responseObj).toString();
-            writer.write(json);
-            writer.flush();
-            writer.close();
         }
     }
 
     public static RequestSessionBean genRequestSessionBean(String requestMethodText, String requestPath) {
         RequestSessionBean requestSessionBean = new RequestSessionBean();
 
-        HandlerManager.getRequestMap().forEach((requestBean, workerBean) -> {
-            Pattern pattern = Pattern.compile(requestBean.getRequestPathPattern());
-            String urlDefinedInHandler = requestBean.getRequestPath();
+        HandlerManager.getRequestMap().forEach(
+                (requestBean, workerBean) -> {
+                    Pattern pattern = Pattern.compile(requestBean.getRequestPathPattern());
+                    String urlDefinedInHandler = requestBean.getRequestPath();
 
-            boolean isUrlMatched = pattern.matcher(requestPath).find();
-            boolean isRequestMethodMatched = requestBean.getRequestMethod().equals(requestMethodText)
+                    boolean isUrlMatched = pattern.matcher(requestPath).find();
+                    boolean isRequestMethodMatched = requestBean.getRequestMethod().equals(requestMethodText);
 
-            if (isRequestMethodMatched && isUrlMatched) {
-                requestSessionBean.setPathVariableParameterMap(
-                        parseIncomingPath2pathVariableMap(requestPath, urlDefinedInHandler)
-                );
+                    if (isRequestMethodMatched && isUrlMatched) {
+                        requestSessionBean.setPathVariableParameterMap(
+                                parseIncomingPath2pathVariableMap(requestPath, urlDefinedInHandler)
+                        );
 
-                requestSessionBean.setWorkerNeeded(workerBean);
-            }
-        });
+                        requestSessionBean.setWorkerNeeded(workerBean);
+                    }
+                });
 
         return requestSessionBean;
     }

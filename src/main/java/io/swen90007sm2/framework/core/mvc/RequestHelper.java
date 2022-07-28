@@ -22,26 +22,26 @@ public class RequestHelper {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RequestHelper.class);
 
-    public static RequestSessionBean genParamWithServletRequest(HttpServletRequest request) {
-        Map<String, Object> paramMap;
-
-        if (request.getMethod().toUpperCase().equals(RequestMethod.GET.name())) {
-            // get GET parameter from Servlet Request
-            // params in url
-            Enumeration<String> parameterNames = request.getParameterNames();
-            // if there is no param in this request
-            if (!parameterNames.hasMoreElements()) return null;
-
-            paramMap = doGet(request, parameterNames);
-
-        } else {
-            // get POST, PUT, DELETE from request
-            // params in body as JSON
-            paramMap = doPost(request);
-        }
-
-        return new RequestSessionBean(paramMap);
-    }
+//    public static RequestSessionBean genParamWithServletRequest(HttpServletRequest request) {
+//        Map<String, Object> paramMap;
+//
+//        if (request.getMethod().toUpperCase().equals(RequestMethod.GET.name())) {
+//            // get GET parameter from Servlet Request
+//            // params in url
+//            Enumeration<String> parameterNames = request.getParameterNames();
+//            // if there is no param in this request
+//            if (!parameterNames.hasMoreElements()) return null;
+//
+//            paramMap = doGet(request, parameterNames);
+//
+//        } else {
+//            // get POST, PUT, DELETE from request
+//            // params in body as JSON
+//            paramMap = doPost(request);
+//        }
+//
+//        return new RequestSessionBean(paramMap);
+//    }
 
     /**
      * doPost will read JSON from request body to get param
