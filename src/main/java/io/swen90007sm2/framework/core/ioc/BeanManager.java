@@ -1,6 +1,6 @@
-package io.swen90007sm2.framework.core.helper;
+package io.swen90007sm2.framework.core.ioc;
 
-import io.swen90007sm2.framework.core.util.ReflectionUtil;
+import io.swen90007sm2.framework.common.util.ReflectionUtil;
 
 import java.util.HashMap;
 import java.util.Map;

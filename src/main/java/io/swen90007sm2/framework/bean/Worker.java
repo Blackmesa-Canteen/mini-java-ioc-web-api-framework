@@ -1,9 +1,10 @@
 package io.swen90007sm2.framework.bean;
 
 import java.lang.reflect.Method;
+import java.util.Map;
 
 /**
- * Used to seal up Handler meta data.
+ * Used to seal up one handler method with relative params.
  *
  * @author Xiaotian
  */

@@ -20,8 +20,8 @@ public class IocWebApiApplication {
      */
     public static void run(int portNumber) {
 
-        LOGGER.info("SWEN90007 mini Java Ioc web app");
-        LOGGER.info("Start to run the IoC Web Application.");
+        LOGGER.info("SWEN90007 mini Java Ioc web Api app");
+        LOGGER.info("Start to run the IoC Web Api Application.");
 
         // load core modules
         AppContextLoader.initAppContext();
@@ -36,6 +36,6 @@ public class IocWebApiApplication {
             throw new RuntimeException(e);
         }
 
-        LOGGER.info("Application is running.");
+        LOGGER.info("Application is running. Good luck no bugs mate");
     }
 }

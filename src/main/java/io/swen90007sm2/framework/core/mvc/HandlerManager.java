@@ -1,10 +1,12 @@
-package io.swen90007sm2.framework.core.helper;
+package io.swen90007sm2.framework.core.mvc;
 
-import io.swen90007sm2.framework.annotation.Handler;
-import io.swen90007sm2.framework.annotation.HandlesRequest;
+import io.swen90007sm2.framework.annotation.mvc.Handler;
+import io.swen90007sm2.framework.annotation.mvc.HandlesRequest;
 import io.swen90007sm2.framework.bean.Request;
+import io.swen90007sm2.framework.bean.RequestSessionBean;
 import io.swen90007sm2.framework.bean.Worker;
-import io.swen90007sm2.framework.core.util.ReflectionUtil;
+import io.swen90007sm2.framework.core.ioc.ClassManager;
+import io.swen90007sm2.framework.common.util.ReflectionUtil;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -12,6 +14,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 /**
  * helper for Handler level
@@ -20,10 +23,14 @@ import java.util.Set;
 public class HandlerManager {
 
     /**
-     * This map holds map: [RequestParam(Method + URL)] to [Handler method].
+     * This map holds: [RequestParam(Method + URL)] to [Handler method].
      * Worker object is a map of Handler class and a method
      */
     private static final Map<Request, Worker> REQUEST_WORKER_MAP = new HashMap<>();
+
+    public static Map<Request, Worker> getRequestMap () {
+        return REQUEST_WORKER_MAP;
+    }
 
     static {
         Set<Class<?>> handlerClassSet = ClassManager.getHandlerClassSet();
@@ -41,9 +48,9 @@ public class HandlerManager {
         String requestRootPath = "";
         // get Handler's root request path
         Handler handlerAnnotationObj = handlerClass.getAnnotation(Handler.class);
-        String rootPathFromAnno = handlerAnnotationObj.path();
-        if (StringUtils.isNotEmpty(rootPathFromAnno)) {
-            requestRootPath += rootPathFromAnno;
+        String basePathFromAnno = handlerAnnotationObj.path();
+        if (StringUtils.isNotEmpty(basePathFromAnno)) {
+            requestRootPath += basePathFromAnno;
         }
 
 
@@ -66,8 +73,9 @@ public class HandlerManager {
         }
     }
 
-    public static Worker getWorker(String requestMethodText, String requestPath) {
-        Request request = new Request(requestMethodText, requestPath);
-        return REQUEST_WORKER_MAP.get(request);
-    }
+//    public static Worker getWorker(String requestMethodText, String requestPath) {
+//        Request request = new Request(requestMethodText, requestPath);
+//        return REQUEST_WORKER_MAP.get(request);
+//    }
+
 }

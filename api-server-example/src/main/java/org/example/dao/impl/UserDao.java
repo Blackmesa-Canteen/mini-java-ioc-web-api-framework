@@ -1,6 +1,6 @@
 package org.example.dao.impl;
 
-import io.swen90007sm2.framework.annotation.Dao;
+import io.swen90007sm2.framework.annotation.mvc.Dao;
 import org.example.dao.IUsedDao;
 import org.example.entity.User;
 

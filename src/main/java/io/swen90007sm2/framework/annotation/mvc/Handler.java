@@ -1,4 +1,4 @@
-package io.swen90007sm2.framework.annotation;
+package io.swen90007sm2.framework.annotation.mvc;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

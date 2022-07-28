@@ -1,4 +1,4 @@
-package io.swen90007sm2.framework.core.util;
+package io.swen90007sm2.framework.common.util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -14,13 +14,16 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 /**
- * class manager, handler reflection logic
+ * class manager, handler reflection logic.
+ *
+ * Scan and load class file!
  *
  * @author xiaotian
  */
 public class ClassLoadUtil {
 
     /**
+     *
      * Using context class loader to break Parent delegation mechanism of JVM,
      * to avoid class not found error, because by default some class will be loaded
      * within the root package of the JDK.

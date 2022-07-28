@@ -1,9 +1,10 @@
 package org.example.blo.impl;
 
+import io.swen90007sm2.framework.annotation.ioc.AutoInjected;
+import io.swen90007sm2.framework.annotation.mvc.Blo;
 import org.example.dao.IUsedDao;
 import org.example.entity.User;
 import org.example.blo.IUserBlo;
-import io.swen90007sm2.framework.annotation.*;
 
 @Blo
 public class UserBlo implements IUserBlo {

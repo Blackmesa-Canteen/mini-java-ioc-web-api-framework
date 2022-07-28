@@ -1,4 +1,4 @@
-package io.swen90007sm2.framework.constant;
+package io.swen90007sm2.framework.common.constant;
 
 
 /**

@@ -1,7 +1,7 @@
-package io.swen90007sm2.framework.core.helper;
+package io.swen90007sm2.framework.core.config;
 
-import io.swen90007sm2.framework.constant.ConfigFileConstant;
-import io.swen90007sm2.framework.core.util.ConfigFileUtil;
+import io.swen90007sm2.framework.common.constant.ConfigFileConstant;
+import io.swen90007sm2.framework.common.util.ConfigFileUtil;
 
 import java.util.Properties;
 

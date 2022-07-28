@@ -1,9 +1,9 @@
-package io.swen90007sm2.framework.core.helper;
+package io.swen90007sm2.framework.core.mvc;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import io.swen90007sm2.framework.bean.RequestParam;
-import io.swen90007sm2.framework.constant.RequestMethod;
+import io.swen90007sm2.framework.bean.RequestSessionBean;
+import io.swen90007sm2.framework.common.constant.RequestMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +22,7 @@ public class RequestHelper {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RequestHelper.class);
 
-    public static RequestParam genParamWithServletRequest(HttpServletRequest request) {
+    public static RequestSessionBean genParamWithServletRequest(HttpServletRequest request) {
         Map<String, Object> paramMap;
 
         if (request.getMethod().toUpperCase().equals(RequestMethod.GET.name())) {
@@ -40,7 +40,7 @@ public class RequestHelper {
             paramMap = doPost(request);
         }
 
-        return new RequestParam(paramMap);
+        return new RequestSessionBean(paramMap);
     }
 
     /**

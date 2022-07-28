@@ -1,9 +1,10 @@
-package io.swen90007sm2.framework.core.helper;
+package io.swen90007sm2.framework.core.ioc;
 
-import io.swen90007sm2.framework.annotation.Dao;
-import io.swen90007sm2.framework.annotation.Handler;
-import io.swen90007sm2.framework.annotation.Blo;
-import io.swen90007sm2.framework.core.util.ClassLoadUtil;
+import io.swen90007sm2.framework.annotation.mvc.Dao;
+import io.swen90007sm2.framework.annotation.mvc.Handler;
+import io.swen90007sm2.framework.annotation.mvc.Blo;
+import io.swen90007sm2.framework.core.config.ConfigFileReader;
+import io.swen90007sm2.framework.common.util.ClassLoadUtil;
 
 import java.lang.annotation.Annotation;
 import java.util.HashSet;

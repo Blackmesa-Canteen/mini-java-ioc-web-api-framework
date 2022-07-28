@@ -1,6 +1,6 @@
 package io.swen90007sm2.framework.db;
 
-import io.swen90007sm2.framework.core.helper.ConfigFileReader;
+import io.swen90007sm2.framework.core.config.ConfigFileReader;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;

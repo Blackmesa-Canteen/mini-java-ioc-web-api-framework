@@ -1,4 +1,4 @@
-package io.swen90007sm2.framework.core.util;
+package io.swen90007sm2.framework.common.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

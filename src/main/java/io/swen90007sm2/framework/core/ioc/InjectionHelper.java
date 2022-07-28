@@ -1,7 +1,7 @@
-package io.swen90007sm2.framework.core.helper;
+package io.swen90007sm2.framework.core.ioc;
 
-import io.swen90007sm2.framework.annotation.AutoInjected;
-import io.swen90007sm2.framework.core.util.ReflectionUtil;
+import io.swen90007sm2.framework.annotation.ioc.AutoInjected;
+import io.swen90007sm2.framework.common.util.ReflectionUtil;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.lang.reflect.Field;

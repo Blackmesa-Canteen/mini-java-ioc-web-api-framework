@@ -1,6 +1,6 @@
-package io.swen90007sm2.framework.annotation;
+package io.swen90007sm2.framework.annotation.mvc;
 
-import io.swen90007sm2.framework.constant.RequestMethod;
+import io.swen90007sm2.framework.common.constant.RequestMethod;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
