@@ -18,9 +18,9 @@ public class IocWebApiApplication {
     /**
      * Entrance to startup the IoC web application
      */
-    public static void run(int portNumber) {
+    public static void run(String hostName, int portNumber) {
 
-        LOGGER.info("SWEN90007 mini Java Ioc web Api app");
+        LOGGER.info("SWEN90007 mini Java Ioc web Api app framework");
         LOGGER.info("Start to run the IoC Web Api Application.");
 
         // load core modules
@@ -28,7 +28,7 @@ public class IocWebApiApplication {
 
         LOGGER.info("Startup the web server.");
         // start server
-        TomcatServer server = new TomcatServer(portNumber);
+        TomcatServer server = new TomcatServer(hostName, portNumber);
         try {
             server.run();
         } catch (LifecycleException e) {
@@ -36,6 +36,6 @@ public class IocWebApiApplication {
             throw new RuntimeException(e);
         }
 
-        LOGGER.info("Application is running. Good luck no bugs mate");
+        LOGGER.info("Application is running. Good luck no bugs mate :)");
     }
 }

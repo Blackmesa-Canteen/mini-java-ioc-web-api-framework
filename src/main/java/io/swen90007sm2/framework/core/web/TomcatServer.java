@@ -12,13 +12,15 @@ import org.apache.catalina.startup.Tomcat;
  * @author xiaotian
  */
 public class TomcatServer {
+    private String hostName = "localhost";
     private Tomcat tomcat;
     private int portNumber = 8088;
 
     public TomcatServer() {
     }
 
-    public TomcatServer(int portNumber) {
+    public TomcatServer(String hostName, int portNumber) {
+        this.hostName = hostName;
         this.portNumber = portNumber;
     }
 
@@ -31,6 +33,7 @@ public class TomcatServer {
         // init tomcat
         tomcat = new Tomcat();
         tomcat.setPort(portNumber);
+        tomcat.setHostname(hostName);
         tomcat.start();
 
         Context context = new StandardContext();
