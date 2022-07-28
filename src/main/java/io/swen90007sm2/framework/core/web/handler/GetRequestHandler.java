@@ -18,9 +18,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GetRequestHandler implements IRequestHandler {
 
@@ -30,8 +28,16 @@ public class GetRequestHandler implements IRequestHandler {
     public void handle(HttpServletRequest req, HttpServletResponse resp, RequestSessionBean requestSessionBean) {
         String requestPath = req.getServletPath();
 
-        Map<String, String> queryParamMap = getQueryParams(requestPath);
-        requestSessionBean.setQueryParameterMap(queryParamMap);
+//        Map<String, String> queryParamMap = getQueryParams(requestPath);
+
+        Enumeration<String> parameterNames = req.getParameterNames();
+        Map<String, String> queryParameterMap = new HashMap<>();
+        while (parameterNames.hasMoreElements()) {
+            String queryParamName = parameterNames.nextElement();
+            queryParameterMap.put(queryParamName, req.getParameter(queryParamName));
+        }
+
+        requestSessionBean.setQueryParameterMap(queryParameterMap);
 
         Worker worker = requestSessionBean.getWorkerNeeded();
 
