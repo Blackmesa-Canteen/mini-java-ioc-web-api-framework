@@ -1,0 +1,53 @@
+package io.swen90007sm2.framework.core.aop.proxy;
+
+import io.swen90007sm2.framework.bean.MethodCalling;
+import io.swen90007sm2.framework.core.aop.Interceptor;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+
+/**
+ * jak proxy is used when object uses a Interface, otherwise, use CGLib to enhance byte code
+ *
+ * @author xiaotian
+ */
+public class JdkProxy implements InvocationHandler {
+
+    private final Interceptor interceptor;
+    private final Object targetObj;
+
+    public JdkProxy(Interceptor interceptor, Object targetObj) {
+        this.interceptor = interceptor;
+        this.targetObj = targetObj;
+    }
+
+    /**
+     * Processes a method invocation on a proxy instance and returns the result.
+     * This method will be invoked on an invocation handler when a method is
+     * invoked on a proxy instance that it is associated with
+     *
+     */
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        MethodCalling methodCalling = new MethodCalling(targetObj, method, args);
+
+        // enhance the original method with interceptor logic
+        return interceptor.intercept(methodCalling);
+    }
+
+    /**
+     * wrap original object with proxy instance
+     */
+    public static Object enhanceWithProxy(Object targetObj, Interceptor interceptor) {
+        JdkProxy proxy = new JdkProxy(interceptor, targetObj);
+
+        return Proxy.newProxyInstance(
+                targetObj.getClass().getClassLoader(),
+                targetObj.getClass().getInterfaces(),
+                proxy
+        );
+    }
+
+
+}
