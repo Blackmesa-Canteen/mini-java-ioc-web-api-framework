@@ -14,7 +14,7 @@ import io.swen90007sm2.framework.common.util.ClassLoadUtil;
  *
  * @author xiaotain
  */
-public class AppContextLoader {
+public class  AppContextLoader {
 
     /**
      * Load 5 helper class, run static blocks in them.

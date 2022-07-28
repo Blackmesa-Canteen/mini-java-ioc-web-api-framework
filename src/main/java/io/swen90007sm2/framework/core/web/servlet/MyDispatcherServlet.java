@@ -1,9 +1,14 @@
 package io.swen90007sm2.framework.core.web.servlet;
 
+import io.swen90007sm2.framework.bean.R;
 import io.swen90007sm2.framework.bean.RequestSessionBean;
 import io.swen90007sm2.framework.core.mvc.HandlerManager;
 import io.swen90007sm2.framework.core.web.factory.RequestHandlerFactory;
+import io.swen90007sm2.framework.core.web.factory.ResponseFactory;
 import io.swen90007sm2.framework.core.web.handler.IRequestHandler;
+import io.swen90007sm2.framework.exception.InternalException;
+import io.swen90007sm2.framework.exception.RequestException;
+import io.swen90007sm2.framework.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,21 +40,31 @@ public class MyDispatcherServlet extends HttpServlet {
 
         LOGGER.info("incoming request: " + requestMethod + " , path: " + requestPath);
 
-        // handle the case: "/contextXXX/userList"
-//        String[] splits = requestPath.split("/");
-//        if (splits.length > 2) {
-//            requestPath = "/" + splits[2];
-//        }
+        try {
+            // generate request-response session bean for this new serving session
+            RequestSessionBean sessionBean = genRequestSessionBean(requestMethod, requestPath);
 
-        // generate request-response session bean for this new serving session
-        RequestSessionBean sessionBean = genRequestSessionBean(requestMethod, requestPath);
-
-        IRequestHandler requestHandler = RequestHandlerFactory.get(requestMethod);
-        if (sessionBean.getWorkerNeeded() != null) {
-            // handle the request
-            requestHandler.handle(req, resp, sessionBean);
-        } else {
-            LOGGER.info("mismatched a request: [" + requestMethod + "] " + requestPath);
+            IRequestHandler requestHandler = RequestHandlerFactory.get(requestMethod);
+            if (sessionBean.getWorkerNeeded() != null) {
+                // handle the request
+                requestHandler.handle(req, resp, sessionBean);
+            } else {
+                LOGGER.warn("handler mismatched with request: [" + requestMethod + "] " + requestPath);
+                throw new ResourceNotFoundException("handler mismatched with request: [" + requestMethod + "] " + requestPath);
+            }
+        } catch (ResourceNotFoundException e) {
+            R responseBean = ResponseFactory.getResourceNotFoundResponseBean(e.toString());
+            IRequestHandler.handleRestfulResponse(responseBean, resp);
+        } catch (RequestException e) {
+            R responseBean = ResponseFactory.getRequestErrorResponseBean(e.toString());
+            IRequestHandler.handleRestfulResponse(responseBean, resp);
+        } catch (InternalException e) {
+            R responseBean = ResponseFactory.getServerInternalErrorResponseBean(e.toString());
+            IRequestHandler.handleRestfulResponse(responseBean, resp);
+        } catch (Exception e) {
+            LOGGER.error("Servlet caught an Internal exception: ", e);
+            R responseBean = ResponseFactory.getServerInternalErrorResponseBean(e.toString());
+            IRequestHandler.handleRestfulResponse(responseBean, resp);
         }
     }
 

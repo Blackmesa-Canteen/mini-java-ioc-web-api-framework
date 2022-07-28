@@ -8,34 +8,36 @@
 
 package io.swen90007sm2.framework.exception;
 
+import org.apache.http.HttpStatus;
+
 /**
  * customized Exception
  *
  * @author xiaotian
  */
-public class OtherException extends RuntimeException {
+public class InternalException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 	
     private String msg;
-    private int code = 500;
+    private int code = HttpStatus.SC_INTERNAL_SERVER_ERROR;
     
-    public OtherException(String msg) {
+    public InternalException(String msg) {
 		super(msg);
 		this.msg = msg;
 	}
 	
-	public OtherException(String msg, Throwable e) {
+	public InternalException(String msg, Throwable e) {
 		super(msg, e);
 		this.msg = msg;
 	}
 	
-	public OtherException(String msg, int code) {
+	public InternalException(String msg, int code) {
 		super(msg);
 		this.msg = msg;
 		this.code = code;
 	}
 	
-	public OtherException(String msg, int code, Throwable e) {
+	public InternalException(String msg, int code, Throwable e) {
 		super(msg, e);
 		this.msg = msg;
 		this.code = code;

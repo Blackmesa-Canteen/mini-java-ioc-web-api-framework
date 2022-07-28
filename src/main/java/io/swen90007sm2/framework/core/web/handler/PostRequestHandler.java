@@ -65,7 +65,7 @@ public class PostRequestHandler implements IRequestHandler {
             Object methodCallingResult = ReflectionUtil.invokeMethod(handlerBean, targetMethod, paramObjList.toArray());
 
             try {
-                handleRestfulResponse((R) methodCallingResult, resp);
+                IRequestHandler.handleRestfulResponse((R) methodCallingResult, resp);
             } catch (IOException e) {
                 LOGGER.info("handleRestfulResponse IO err: ", e);
                 throw new RuntimeException(e);
@@ -96,20 +96,5 @@ public class PostRequestHandler implements IRequestHandler {
         }
 
         return sb.toString();
-    }
-
-    /**
-     * returns JSON
-     */
-    private void handleRestfulResponse(R responseObj, HttpServletResponse response) throws IOException {
-        if (responseObj != null) {
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            PrintWriter writer = response.getWriter();
-            String json = JSON.toJSON(responseObj).toString();
-            writer.write(json);
-            writer.flush();
-            writer.close();
-        }
     }
 }
