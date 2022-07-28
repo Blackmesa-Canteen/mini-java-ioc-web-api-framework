@@ -13,6 +13,13 @@ public class UserHandler {
     @AutoInjected
     private IUserBlo userService;
 
+    @HandlesRequest(path = "/", method = RequestMethod.GET)
+    public R getUserRoot() {
+
+        User user = userService.getUserById(2323232L);
+        return R.ok().setData(user);
+    }
+
     @HandlesRequest(path = "/user/{id}", method = RequestMethod.GET)
     public R getUser(@PathVariable("id") Long id) {
 
