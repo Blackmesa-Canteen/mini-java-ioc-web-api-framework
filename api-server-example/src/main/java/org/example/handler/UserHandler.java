@@ -3,7 +3,6 @@ package org.example.handler;
 import io.swen90007sm2.framework.annotation.ioc.AutoInjected;
 import io.swen90007sm2.framework.annotation.mvc.*;
 import io.swen90007sm2.framework.bean.R;
-import io.swen90007sm2.framework.bean.RequestSessionBean;
 import io.swen90007sm2.framework.common.constant.RequestMethod;
 import org.example.entity.User;
 import org.example.blo.IUserBlo;
@@ -29,7 +28,7 @@ public class UserHandler {
     }
 
     @HandlesRequest(path = "/user", method = RequestMethod.POST)
-    public R addUser(@RequestJsonParam User user) {
+    public R addUser(@RequestJsonBody User user) {
         boolean res = userService.addUser(user);
 
         if (res) {

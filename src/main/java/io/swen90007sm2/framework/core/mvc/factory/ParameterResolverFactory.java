@@ -1,7 +1,7 @@
 package io.swen90007sm2.framework.core.mvc.factory;
 
 import io.swen90007sm2.framework.annotation.mvc.PathVariable;
-import io.swen90007sm2.framework.annotation.mvc.RequestJsonParam;
+import io.swen90007sm2.framework.annotation.mvc.RequestJsonBody;
 import io.swen90007sm2.framework.annotation.mvc.RequestParam;
 import io.swen90007sm2.framework.core.mvc.resolver.IParameterResolver;
 import io.swen90007sm2.framework.core.mvc.resolver.PathVariableParameterResolver;
@@ -18,7 +18,7 @@ public class ParameterResolverFactory {
         if (parameter.isAnnotationPresent(PathVariable.class)) {
             return new PathVariableParameterResolver();
         }
-        if (parameter.isAnnotationPresent(RequestJsonParam.class)) {
+        if (parameter.isAnnotationPresent(RequestJsonBody.class)) {
             return new RequestJsonParamResolver();
         }
         return null;

@@ -1,7 +1,7 @@
 package io.swen90007sm2.framework.core.mvc.resolver;
 
 import com.alibaba.fastjson.JSON;
-import io.swen90007sm2.framework.annotation.mvc.RequestJsonParam;
+import io.swen90007sm2.framework.annotation.mvc.RequestJsonBody;
 import io.swen90007sm2.framework.bean.RequestSessionBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +16,7 @@ public class RequestJsonParamResolver implements IParameterResolver {
     public Object resolve(RequestSessionBean requestSessionBean, Parameter parameter) {
         Object res = null;
 
-        RequestJsonParam anno = parameter.getDeclaredAnnotation(RequestJsonParam.class);
+        RequestJsonBody anno = parameter.getDeclaredAnnotation(RequestJsonBody.class);
         if (anno != null) {
             try {
                 res = JSON.parseObject(requestSessionBean.getJsonBodyString(), parameter.getType());
