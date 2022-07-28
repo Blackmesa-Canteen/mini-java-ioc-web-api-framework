@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * An annotation used in a class in the handler level.
  *
- *  level structure:  Handler -> Service -> database level
+ *  level structure:  Handler -> Blo -> Dao
  *
  * @author Xiaotian
  */

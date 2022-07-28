@@ -1,12 +1,12 @@
-package org.example.service.impl;
+package org.example.blo.impl;
 
 import org.example.dao.IUsedDao;
 import org.example.entity.User;
-import org.example.service.IUserService;
+import org.example.blo.IUserBlo;
 import io.swen90007sm2.framework.annotation.*;
 
-@Service
-public class UserService implements IUserService {
+@Blo
+public class UserBlo implements IUserBlo {
 
     @AutoInjected
     IUsedDao userDao;

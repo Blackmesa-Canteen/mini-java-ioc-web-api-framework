@@ -5,13 +5,13 @@ import io.swen90007sm2.framework.bean.R;
 import io.swen90007sm2.framework.bean.RequestParam;
 import io.swen90007sm2.framework.constant.RequestMethod;
 import org.example.entity.User;
-import org.example.service.IUserService;
+import org.example.blo.IUserBlo;
 
 @Handler(path = "/user")
 public class UserHandler {
 
     @AutoInjected
-    private IUserService userService;
+    private IUserBlo userService;
 
     @HandlesRequest(path = "/get", method = RequestMethod.GET)
     public R getUser(RequestParam param) {

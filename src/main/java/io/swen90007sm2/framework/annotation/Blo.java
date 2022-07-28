@@ -6,12 +6,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * An annotation that used in a class to mark it as a component of service level.
- * level structure:  Handler -> Service -> database level
+ * An annotation that used in a class to mark it as a component of business logic level.
+ * level structure:  Handler -> Blo -> Dao
  *
  * @author Xiaotian
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Service {
+public @interface Blo {
 }

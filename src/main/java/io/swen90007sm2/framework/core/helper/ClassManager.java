@@ -2,7 +2,7 @@ package io.swen90007sm2.framework.core.helper;
 
 import io.swen90007sm2.framework.annotation.Dao;
 import io.swen90007sm2.framework.annotation.Handler;
-import io.swen90007sm2.framework.annotation.Service;
+import io.swen90007sm2.framework.annotation.Blo;
 import io.swen90007sm2.framework.core.util.ClassLoadUtil;
 
 import java.lang.annotation.Annotation;
@@ -45,10 +45,10 @@ public class ClassManager {
         return set;
     }
 
-    public static Set<Class<?>> getServiceClassSet() {
+    public static Set<Class<?>> getBloClassSet() {
         Set<Class<?>> set = new HashSet<>();
         for (Class<?> clazz : CLASS_SET) {
-            if (clazz.isAnnotationPresent(Service.class)) {
+            if (clazz.isAnnotationPresent(Blo.class)) {
                 set.add(clazz);
             }
         }
@@ -68,11 +68,11 @@ public class ClassManager {
     }
 
     /**
-     * Component: a bean combination of Service and Handler and Dao.
+     * Component: a bean combination of Blo and Handler and Dao.
      */
     public static Set<Class<?>> getComponentClassSet() {
         Set<Class<?>> set = new HashSet<>();
-        set.addAll(getServiceClassSet());
+        set.addAll(getBloClassSet());
         set.addAll(getHandlerClassSet());
         set.addAll(getDaoClassSet());
         return set;
