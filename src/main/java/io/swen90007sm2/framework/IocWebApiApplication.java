@@ -39,7 +39,7 @@ public class IocWebApiApplication {
         // load db connection
         DbConnectionHelper.getDbConnection();
 
-        LOGGER.info("Startup the web server.");
+        LOGGER.info("Startup the web server...");
         // start server
         TomcatServer server = new TomcatServer(hostName, portNumber);
         try {

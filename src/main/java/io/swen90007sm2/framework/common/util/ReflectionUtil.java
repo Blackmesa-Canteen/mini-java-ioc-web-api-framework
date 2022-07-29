@@ -1,7 +1,6 @@
 package io.swen90007sm2.framework.common.util;
 
 import io.swen90007sm2.framework.exception.RequestException;
-import io.swen90007sm2.framework.exception.ValidationException;
 import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import javax.validation.ConstraintViolationException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.Set;
 
 /**
@@ -26,7 +24,7 @@ public class ReflectionUtil {
     /**
      * instantiate an object based a class object
      */
-    public static Object newInstance(Class<?> clazz) {
+    public static Object genNewInstanceByClass(Class<?> clazz) {
         Object instance;
         try {
             instance = clazz.getDeclaredConstructor().newInstance();

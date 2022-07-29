@@ -5,7 +5,8 @@ import io.swen90007sm2.framework.common.util.ReflectionUtil;
 import java.lang.reflect.Method;
 
 /**
- * a bean for one Method calling, cache essential elements for a method calling. used in aop and interceptor.
+ * a bean for one Method calling, cache essential elements for a method calling. used in aop and interceptor
+ * to cache the original method calling, after enhance logic, can call original method with this bean.
  * @author xiaotian
  */
 public class MethodCalling {

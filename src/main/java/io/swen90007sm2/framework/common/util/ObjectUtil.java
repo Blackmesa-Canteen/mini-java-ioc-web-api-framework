@@ -11,8 +11,10 @@ import java.beans.PropertyEditorManager;
 public class ObjectUtil {
 
     /**
-     * convert string to object with spefic type，
-     * used to convert incoming param to the corresponding type declared in handler method param
+     * convert string to object with specific type，
+     * used to convert incoming param to the corresponding type declared in handler method param.
+     *
+     * This technique is used in the Spring Boot framework src code.
      *
      */
     public static Object convertString2Object(String srcText, Class<?> targetClass) {

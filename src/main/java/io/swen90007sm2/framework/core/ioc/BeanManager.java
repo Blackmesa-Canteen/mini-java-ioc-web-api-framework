@@ -38,7 +38,7 @@ public class BeanManager {
 
         // instantiate objects from class object, then put in the map
         for (Class<?> clazz :beanClassSet) {
-            Object object = ReflectionUtil.newInstance(clazz);
+            Object object = ReflectionUtil.genNewInstanceByClass(clazz);
             BEAN_MAP.put(clazz, object);
         }
 
