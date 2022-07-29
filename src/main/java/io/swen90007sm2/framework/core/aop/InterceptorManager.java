@@ -35,8 +35,8 @@ public class InterceptorManager {
         // get subclasses that implmented Interceptor abstract class
         Set<Class<? extends AbstractInterceptor>> interceptorClasses = ReflectionUtil.getSubClass(basePackage, AbstractInterceptor.class);
 
-        // get @Aspect class
-        Set<Class<?>> aspectClasses = ClassManager.getAspectClassSet();
+//        // get @Aspect class
+//        Set<Class<?>> aspectClasses = ClassManager.getAspectClassSet();
 
         // traverse all intercepter classes and instantiate them
         interceptorClasses.forEach(interceptorClass -> {
