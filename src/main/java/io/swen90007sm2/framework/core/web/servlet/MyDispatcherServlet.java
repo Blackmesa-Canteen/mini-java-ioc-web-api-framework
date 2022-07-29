@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -97,7 +96,7 @@ public class MyDispatcherServlet extends HttpServlet {
                         );
 
                         requestSessionBean.setWorkerNeeded(workerBean);
-                        LOGGER.info("Handler Mapping: Handler is {}, method is {}",
+                        LOGGER.info("Handler Mapping: Handler [{}], method [{}]",
                                 workerBean.getHandlerClazz().getName(),
                                 workerBean.getHandlerMethod().getName());
                     }
