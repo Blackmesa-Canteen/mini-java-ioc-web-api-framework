@@ -29,6 +29,7 @@ This project is inspired by the other project:
 - [jsoncat](https://github.com/Snailclimb/jsoncat)
 - [handwritten-mvc](https://github.com/tyshawnlee/handwritten-mvc)
 - [spring-boot](https://github.com/spring-projects/spring-boot)
+- [spring-imitator](https://github.com/Blackmesa-Canteen/spring-imitator)
 
 # license
 ```
