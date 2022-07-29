@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolationException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,19 +53,24 @@ public class MyDispatcherServlet extends HttpServlet {
                 LOGGER.warn("handler mismatched with request: [" + requestMethod + "] " + requestPath);
                 throw new ResourceNotFoundException("handler mismatched with request: [" + requestMethod + "] " + requestPath);
             }
+
+            // returns exception json
         } catch (ResourceNotFoundException e) {
             R responseBean = ResponseFactory.getResourceNotFoundResponseBean(e.toString());
-            IRequestHandler.handleRestfulResponse(responseBean, resp);
+            IRequestHandler.respondRequestWithJson(responseBean, resp);
+        } catch (ConstraintViolationException e) {
+            R responseBean = ResponseFactory.getValidationErrResponseBean(e.getConstraintViolations());
+            IRequestHandler.respondRequestWithJson(responseBean, resp);
         } catch (RequestException e) {
             R responseBean = ResponseFactory.getRequestErrorResponseBean(e.toString());
-            IRequestHandler.handleRestfulResponse(responseBean, resp);
+            IRequestHandler.respondRequestWithJson(responseBean, resp);
         } catch (InternalException e) {
             R responseBean = ResponseFactory.getServerInternalErrorResponseBean(e.toString());
-            IRequestHandler.handleRestfulResponse(responseBean, resp);
+            IRequestHandler.respondRequestWithJson(responseBean, resp);
         } catch (Exception e) {
             LOGGER.error("Servlet caught an Internal exception: ", e);
-            R responseBean = ResponseFactory.getServerInternalErrorResponseBean(e.toString());
-            IRequestHandler.handleRestfulResponse(responseBean, resp);
+            R responseBean = ResponseFactory.getServerInternalErrorResponseBean("Internal error, please contact admin.");
+            IRequestHandler.respondRequestWithJson(responseBean, resp);
         }
     }
 

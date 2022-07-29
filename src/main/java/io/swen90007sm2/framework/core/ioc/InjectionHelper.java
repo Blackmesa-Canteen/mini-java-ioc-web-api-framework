@@ -2,6 +2,9 @@ package io.swen90007sm2.framework.core.ioc;
 
 import io.swen90007sm2.framework.annotation.ioc.AutoInjected;
 import io.swen90007sm2.framework.common.util.ReflectionUtil;
+import io.swen90007sm2.framework.core.aop.factory.AopBeanPostProcessorFactory;
+import io.swen90007sm2.framework.core.aop.processor.CgLibAopBeanProcessor;
+import io.swen90007sm2.framework.core.aop.processor.IBeanPostProcessor;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.lang.reflect.Field;
@@ -57,6 +60,12 @@ public class InjectionHelper {
                 Object fieldInstance = beanMap.get(fieldImplClass);
                 if (fieldInstance != null) {
                     // if beanInstance exists, do injection
+
+                    // AOP enhanced object injection to the field TODO to be tested
+                    IBeanPostProcessor beanPostProcessor = AopBeanPostProcessorFactory.getCorrectBeanPostProcessor(field.getType());
+                    fieldInstance = beanPostProcessor.postProcessToBean(fieldInstance);
+
+                    // attach the bean result to the field
                     ReflectionUtil.setField(beanInstance, field, fieldInstance);
                 }
             }

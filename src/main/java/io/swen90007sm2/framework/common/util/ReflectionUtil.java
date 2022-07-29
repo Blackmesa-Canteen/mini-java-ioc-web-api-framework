@@ -1,10 +1,14 @@
 package io.swen90007sm2.framework.common.util;
 
+import io.swen90007sm2.framework.exception.ValidationException;
+import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.validation.ConstraintViolationException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Set;
 
 /**
  * Reflection Utils, including instantiate new object, invoke a method and so on, based on class object loaded by ClassLoadUtil.
@@ -45,7 +49,11 @@ public class ReflectionUtil {
         try {
             method.setAccessible(true);
             result = method.invoke(object, args);
-        } catch (Exception e) {
+        } catch (Throwable e) {
+            if (e.getCause() != null && e.getCause() instanceof ConstraintViolationException) {
+                LOGGER.error("invoke method param validation, exception: " + e.toString());
+                throw (ConstraintViolationException) e.getCause();
+            }
             LOGGER.error("invoke method failure, exception: ", e);
             throw new RuntimeException(e);
         }
@@ -70,5 +78,14 @@ public class ReflectionUtil {
      */
     public static Method[] getMethods(Class<?> clazz) {
         return clazz.getDeclaredMethods();
+    }
+
+    /**
+     * Get the implementation classes of the interface
+     */
+    public static <T> Set<Class<? extends T>> getSubClass(String packageName, Class<T> interfaceClass) {
+        Reflections reflections = new Reflections(packageName);
+        return reflections.getSubTypesOf(interfaceClass);
+
     }
 }

@@ -1,7 +1,5 @@
 package io.swen90007sm2.framework.core.web.handler;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import io.swen90007sm2.framework.bean.R;
 import io.swen90007sm2.framework.bean.RequestSessionBean;
 import io.swen90007sm2.framework.bean.Worker;
@@ -9,7 +7,6 @@ import io.swen90007sm2.framework.common.util.ReflectionUtil;
 import io.swen90007sm2.framework.core.ioc.BeanManager;
 import io.swen90007sm2.framework.core.mvc.factory.ParameterResolverFactory;
 import io.swen90007sm2.framework.core.mvc.resolver.IParameterResolver;
-import io.swen90007sm2.framework.core.web.servlet.MyDispatcherServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,13 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * handling POST, PUT, DELETE request, returns json
@@ -65,7 +59,7 @@ public class PostRequestHandler implements IRequestHandler {
             Object methodCallingResult = ReflectionUtil.invokeMethod(handlerBean, targetMethod, paramObjList.toArray());
 
             try {
-                IRequestHandler.handleRestfulResponse((R) methodCallingResult, resp);
+                IRequestHandler.respondRequestWithJson((R) methodCallingResult, resp);
             } catch (IOException e) {
                 LOGGER.info("handleRestfulResponse IO err: ", e);
                 throw new RuntimeException(e);

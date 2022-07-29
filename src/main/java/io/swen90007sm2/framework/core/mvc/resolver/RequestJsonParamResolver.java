@@ -3,6 +3,7 @@ package io.swen90007sm2.framework.core.mvc.resolver;
 import com.alibaba.fastjson.JSON;
 import io.swen90007sm2.framework.annotation.mvc.RequestJsonBody;
 import io.swen90007sm2.framework.bean.RequestSessionBean;
+import io.swen90007sm2.framework.exception.RequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,6 +28,7 @@ public class RequestJsonParamResolver implements IParameterResolver {
                 res = JSON.parseObject(requestSessionBean.getJsonBodyString(), parameter.getType());
             } catch (Exception e) {
                 LOGGER.error("parse JSON body exception: ", e);
+                throw new RequestException("JSON body not recognized");
             }
         }
 

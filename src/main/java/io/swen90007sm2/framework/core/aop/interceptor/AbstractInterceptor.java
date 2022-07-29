@@ -1,4 +1,4 @@
-package io.swen90007sm2.framework.core.aop;
+package io.swen90007sm2.framework.core.aop.interceptor;
 
 
 import io.swen90007sm2.framework.bean.MethodCalling;
@@ -8,8 +8,9 @@ import io.swen90007sm2.framework.bean.MethodCalling;
  *
  * @author xiaotian
  */
-public abstract class Interceptor {
+public abstract class AbstractInterceptor {
 
+    // default it is in the head
     private int order = -1;
 
     /**

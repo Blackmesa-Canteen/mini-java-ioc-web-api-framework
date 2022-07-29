@@ -1,11 +1,14 @@
 package org.example.entity;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * user entity class
  *
  * @author xiaotian
  */
 public class User {
+    @NotNull(message = "can not be null")
     private Long id;
     private String name;
     private Integer age;

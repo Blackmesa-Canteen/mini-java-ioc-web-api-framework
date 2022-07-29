@@ -1,6 +1,8 @@
 package io.swen90007sm2.framework.core.ioc;
 
 import io.swen90007sm2.framework.common.util.ReflectionUtil;
+import io.swen90007sm2.framework.core.aop.factory.AopBeanPostProcessorFactory;
+import io.swen90007sm2.framework.core.aop.processor.IBeanPostProcessor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -53,5 +55,15 @@ public class BeanManager {
      */
     public static void putBean(Class<?> clazz, Object object) {
         BEAN_MAP.put(clazz, object);
+    }
+
+    /**
+     * apply bean post processors to existing bean in the map.
+     */
+    public static void applyBeanPostProcessorsToBeanMap() {
+        BEAN_MAP.replaceAll((beanClass, beanInstance) -> {
+            IBeanPostProcessor beanPostProcessor = AopBeanPostProcessorFactory.getCorrectBeanPostProcessor(beanClass);
+            return beanPostProcessor.postProcessToBean(beanInstance);
+        });
     }
 }

@@ -1,4 +1,4 @@
-package io.swen90007sm2.framework.annotation.validation;
+package io.swen90007sm2.framework.annotation.aop;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -6,10 +6,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * annotation for JSR303 validation to input param, marks a handler to be enhanced with validator
+ * Aspect for AOP
  * @author xiaotian
  */
-@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Validated {
+@Target(ElementType.TYPE)
+public @interface Aspect {
+    String value() default "";
 }

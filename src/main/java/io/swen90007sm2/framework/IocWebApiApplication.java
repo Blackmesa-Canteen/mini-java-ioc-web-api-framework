@@ -1,5 +1,6 @@
 package io.swen90007sm2.framework;
 
+import io.swen90007sm2.framework.common.util.LogUtil;
 import io.swen90007sm2.framework.core.AppContextLoader;
 import io.swen90007sm2.framework.core.web.TomcatServer;
 import org.apache.catalina.LifecycleException;
@@ -22,6 +23,9 @@ public class IocWebApiApplication {
 
         LOGGER.info("SWEN90007 mini Java Ioc web Api app framework");
         LOGGER.info("Start to run the IoC Web Api Application.");
+
+        // disable warning message caused by CgLib
+        LogUtil.disableIllegalReflectiveWarning();
 
         // load core modules
         AppContextLoader.initAppContext();

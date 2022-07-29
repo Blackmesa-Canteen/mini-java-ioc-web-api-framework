@@ -13,7 +13,7 @@ public interface IRequestHandler {
 
     void handle(HttpServletRequest req, HttpServletResponse resp, RequestSessionBean requestSessionBean);
 
-    static void handleRestfulResponse(R responseObj, HttpServletResponse response) throws IOException {
+    static void respondRequestWithJson(R responseObj, HttpServletResponse response) throws IOException {
         if (responseObj != null) {
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");

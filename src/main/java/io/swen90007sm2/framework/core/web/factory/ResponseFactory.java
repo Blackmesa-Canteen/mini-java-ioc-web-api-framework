@@ -1,7 +1,13 @@
 package io.swen90007sm2.framework.core.web.factory;
 
+import io.swen90007sm2.framework.bean.ParamValidationErrorBean;
 import io.swen90007sm2.framework.bean.R;
 import org.apache.http.HttpStatus;
+
+import javax.validation.ConstraintViolation;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * factory for generate R object
@@ -15,6 +21,18 @@ public class ResponseFactory {
      */
     public static R getSuccessResponseBean(Object data) {
         return R.ok().setData(data);
+    }
+
+    public static R getValidationErrResponseBean (Set<ConstraintViolation<?>> result) {
+        List<ParamValidationErrorBean> resList = new LinkedList<>();
+        for (ConstraintViolation<?> violation : result) {
+            resList.add(new ParamValidationErrorBean(
+                    violation.getPropertyPath().toString(),
+                    violation.getMessageTemplate()
+            ));
+        }
+
+        return R.error(HttpStatus.SC_BAD_REQUEST, "Illegal request parameters.").setData(resList);
     }
 
     /**

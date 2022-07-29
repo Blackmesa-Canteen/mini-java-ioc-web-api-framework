@@ -1,7 +1,7 @@
 package io.swen90007sm2.framework.core.aop.proxy;
 
 import io.swen90007sm2.framework.bean.MethodCalling;
-import io.swen90007sm2.framework.core.aop.Interceptor;
+import io.swen90007sm2.framework.core.aop.interceptor.AbstractInterceptor;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
@@ -15,10 +15,10 @@ import java.lang.reflect.Method;
  */
 public class CglibProxy implements MethodInterceptor {
 
-    private final Interceptor interceptor;
+    private final AbstractInterceptor interceptor;
     private final Object targetObj;
 
-    public CglibProxy(Interceptor interceptor, Object targetObj) {
+    public CglibProxy(AbstractInterceptor interceptor, Object targetObj) {
         this.interceptor = interceptor;
         this.targetObj = targetObj;
     }
@@ -32,7 +32,7 @@ public class CglibProxy implements MethodInterceptor {
     /**
      * enhance a target obj with interceptor and returns the proxy
      */
-    public static Object enhanceWithProxy(Object targetObj, Interceptor interceptor) {
+    public static Object enhanceWithProxy(Object targetObj, AbstractInterceptor interceptor) {
         Class<?> targetClass = targetObj.getClass();
         Class<?> proxyClass = targetClass;
 

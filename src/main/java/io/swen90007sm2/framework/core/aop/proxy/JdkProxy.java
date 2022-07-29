@@ -1,7 +1,7 @@
 package io.swen90007sm2.framework.core.aop.proxy;
 
 import io.swen90007sm2.framework.bean.MethodCalling;
-import io.swen90007sm2.framework.core.aop.Interceptor;
+import io.swen90007sm2.framework.core.aop.interceptor.AbstractInterceptor;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -14,10 +14,10 @@ import java.lang.reflect.Proxy;
  */
 public class JdkProxy implements InvocationHandler {
 
-    private final Interceptor interceptor;
+    private final AbstractInterceptor interceptor;
     private final Object targetObj;
 
-    public JdkProxy(Interceptor interceptor, Object targetObj) {
+    public JdkProxy(AbstractInterceptor interceptor, Object targetObj) {
         this.interceptor = interceptor;
         this.targetObj = targetObj;
     }
@@ -39,7 +39,7 @@ public class JdkProxy implements InvocationHandler {
     /**
      * wrap original object with proxy instance
      */
-    public static Object enhanceWithProxy(Object targetObj, Interceptor interceptor) {
+    public static Object enhanceWithProxy(Object targetObj, AbstractInterceptor interceptor) {
         JdkProxy proxy = new JdkProxy(interceptor, targetObj);
 
         return Proxy.newProxyInstance(

@@ -1,5 +1,6 @@
 package io.swen90007sm2.framework.core;
 
+import io.swen90007sm2.framework.core.aop.InterceptorManager;
 import io.swen90007sm2.framework.core.config.ConfigFileReader;
 import io.swen90007sm2.framework.core.ioc.BeanManager;
 import io.swen90007sm2.framework.core.ioc.ClassManager;
@@ -26,6 +27,7 @@ public class  AppContextLoader {
                 ConfigFileReader.class,
                 ClassManager.class,
                 BeanManager.class,
+                InterceptorManager.class,
                 InjectionHelper.class,
                 HandlerManager.class
         };
@@ -34,5 +36,8 @@ public class  AppContextLoader {
         for (Class<?> clazz : classLoadList) {
             ClassLoadUtil.loadClass(clazz.getName());
         }
+
+        // perform AOP in BEAN_MAP. bean map includes Component (Handler + Blo + Dao)
+        BeanManager.applyBeanPostProcessorsToBeanMap();
     }
 }

@@ -1,5 +1,7 @@
 package io.swen90007sm2.framework.core.ioc;
 
+import io.swen90007sm2.framework.annotation.aop.Aspect;
+import io.swen90007sm2.framework.annotation.ioc.Component;
 import io.swen90007sm2.framework.annotation.mvc.Dao;
 import io.swen90007sm2.framework.annotation.mvc.Handler;
 import io.swen90007sm2.framework.annotation.mvc.Blo;
@@ -68,14 +70,37 @@ public class ClassManager {
         return set;
     }
 
+    public static Set<Class<?>> getAspectClassSet() {
+        Set<Class<?>> set = new HashSet<>();
+        for (Class<?> clazz : CLASS_SET) {
+            if (clazz.isAnnotationPresent(Aspect.class)) {
+                set.add(clazz);
+            }
+        }
+
+        return set;
+    }
+
+    public static Set<Class<?>> getComponentAnnotatedClassSet() {
+        Set<Class<?>> set = new HashSet<>();
+        for (Class<?> clazz : CLASS_SET) {
+            if (clazz.isAnnotationPresent(Component.class)) {
+                set.add(clazz);
+            }
+        }
+
+        return set;
+    }
+
     /**
-     * Component: a bean combination of Blo and Handler and Dao.
+     * Component: beans need to be instantiated. a bean combination of Blo and Handler and Dao.
      */
     public static Set<Class<?>> getComponentClassSet() {
         Set<Class<?>> set = new HashSet<>();
         set.addAll(getBloClassSet());
         set.addAll(getHandlerClassSet());
         set.addAll(getDaoClassSet());
+        set.addAll(getComponentAnnotatedClassSet());
         return set;
     }
 
