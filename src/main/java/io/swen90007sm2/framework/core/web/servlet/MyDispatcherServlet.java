@@ -61,6 +61,9 @@ public class MyDispatcherServlet extends HttpServlet {
         } catch (ConstraintViolationException e) {
             R responseBean = ResponseFactory.getValidationErrResponseBean(e.getConstraintViolations());
             IRequestHandler.respondRequestWithJson(responseBean, resp);
+        } catch (IllegalArgumentException e) {
+            R responseBean = ResponseFactory.getRequestErrorResponseBean(e.toString());
+            IRequestHandler.respondRequestWithJson(responseBean, resp);
         } catch (RequestException e) {
             R responseBean = ResponseFactory.getRequestErrorResponseBean(e.toString());
             IRequestHandler.respondRequestWithJson(responseBean, resp);

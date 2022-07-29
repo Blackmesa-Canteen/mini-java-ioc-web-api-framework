@@ -5,7 +5,7 @@ import io.swen90007sm2.framework.annotation.ioc.Component;
 import io.swen90007sm2.framework.annotation.mvc.Dao;
 import io.swen90007sm2.framework.annotation.mvc.Handler;
 import io.swen90007sm2.framework.annotation.mvc.Blo;
-import io.swen90007sm2.framework.core.config.ConfigFileReader;
+import io.swen90007sm2.framework.core.config.ConfigFileManager;
 import io.swen90007sm2.framework.common.util.ClassLoadUtil;
 
 import java.lang.annotation.Annotation;
@@ -29,7 +29,7 @@ public class ClassManager {
     }
 
     static {
-        String basePackage = ConfigFileReader.getBasePackage();
+        String basePackage = ConfigFileManager.getBasePackage();
         CLASS_SET = ClassLoadUtil.getClassSetUnderPackageName(basePackage);
     }
 

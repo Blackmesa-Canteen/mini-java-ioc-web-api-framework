@@ -1,7 +1,7 @@
 package io.swen90007sm2.framework.core;
 
 import io.swen90007sm2.framework.core.aop.InterceptorManager;
-import io.swen90007sm2.framework.core.config.ConfigFileReader;
+import io.swen90007sm2.framework.core.config.ConfigFileManager;
 import io.swen90007sm2.framework.core.ioc.BeanManager;
 import io.swen90007sm2.framework.core.ioc.ClassManager;
 import io.swen90007sm2.framework.core.ioc.InjectionHelper;
@@ -24,7 +24,7 @@ public class  AppContextLoader {
 
         // the order should not be changed!
         Class<?>[] classLoadList = {
-                ConfigFileReader.class,
+                ConfigFileManager.class,
                 ClassManager.class,
                 BeanManager.class,
                 InterceptorManager.class,

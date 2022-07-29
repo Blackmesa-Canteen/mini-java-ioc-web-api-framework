@@ -7,6 +7,7 @@ import io.swen90007sm2.framework.common.util.ReflectionUtil;
 import io.swen90007sm2.framework.core.ioc.BeanManager;
 import io.swen90007sm2.framework.core.mvc.factory.ParameterResolverFactory;
 import io.swen90007sm2.framework.core.mvc.resolver.IParameterResolver;
+import io.swen90007sm2.framework.exception.RequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,12 +31,12 @@ public class PostRequestHandler implements IRequestHandler {
     public static final String APPLICATION_JSON = "application/json";
 
     @Override
-    public void handle(HttpServletRequest req, HttpServletResponse resp, RequestSessionBean requestSessionBean) {
+    public void handle(HttpServletRequest req, HttpServletResponse resp, RequestSessionBean requestSessionBean) throws Exception {
         String requestPath = req.getServletPath();
 
         if (!req.getContentType().equals(APPLICATION_JSON)) {
             LOGGER.error("only receive application/json type data in POST/PUT/DELETE, err: " + requestPath);
-            throw new IllegalArgumentException("only receive application/json type data in POST/PUT/DELETE");
+            throw new RequestException("only receive application/json type data in POST/PUT/DELETE");
         }
 
         Worker worker = requestSessionBean.getWorkerNeeded();

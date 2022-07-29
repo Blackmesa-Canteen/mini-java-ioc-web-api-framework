@@ -6,5 +6,5 @@ import java.lang.reflect.Parameter;
 
 public interface IParameterResolver {
 
-    Object resolve(RequestSessionBean requestSessionBean, Parameter parameter);
+    Object resolve(RequestSessionBean requestSessionBean, Parameter parameter) throws Exception;
 }

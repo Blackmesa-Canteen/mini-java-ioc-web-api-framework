@@ -28,7 +28,7 @@ public class GetRequestHandler implements IRequestHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(GetRequestHandler.class);
 
     @Override
-    public void handle(HttpServletRequest req, HttpServletResponse resp, RequestSessionBean requestSessionBean) {
+    public void handle(HttpServletRequest req, HttpServletResponse resp, RequestSessionBean requestSessionBean) throws Exception {
 
         // get query parameters
         Enumeration<String> parameterNames = req.getParameterNames();

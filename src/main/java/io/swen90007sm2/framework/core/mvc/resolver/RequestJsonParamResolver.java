@@ -19,7 +19,7 @@ public class RequestJsonParamResolver implements IParameterResolver {
     private static final Logger LOGGER = LoggerFactory.getLogger(RequestJsonParamResolver.class);
 
     @Override
-    public Object resolve(RequestSessionBean requestSessionBean, Parameter parameter) {
+    public Object resolve(RequestSessionBean requestSessionBean, Parameter parameter) throws Exception {
         Object res = null;
 
         RequestJsonBody anno = parameter.getDeclaredAnnotation(RequestJsonBody.class);

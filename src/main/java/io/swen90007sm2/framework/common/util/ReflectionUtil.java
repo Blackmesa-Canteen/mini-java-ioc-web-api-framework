@@ -1,5 +1,6 @@
 package io.swen90007sm2.framework.common.util;
 
+import io.swen90007sm2.framework.exception.RequestException;
 import io.swen90007sm2.framework.exception.ValidationException;
 import org.reflections.Reflections;
 import org.slf4j.Logger;
@@ -53,6 +54,8 @@ public class ReflectionUtil {
             if (e.getCause() != null && e.getCause() instanceof ConstraintViolationException) {
                 LOGGER.error("invoke method param validation, exception: " + e.toString());
                 throw (ConstraintViolationException) e.getCause();
+            } else if (e.getCause() instanceof RequestException) {
+                throw (RequestException) e.getCause();
             }
             LOGGER.error("invoke method failure, exception: ", e);
             throw new RuntimeException(e);

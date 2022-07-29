@@ -1,6 +1,6 @@
 package io.swen90007sm2.framework.db;
 
-import io.swen90007sm2.framework.core.config.ConfigFileReader;
+import io.swen90007sm2.framework.core.config.ConfigFileManager;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -30,10 +30,10 @@ public class DbHelper {
         QUERY_RUNNER = new QueryRunner();
 
         DATA_SOURCE = new BasicDataSource();
-        DATA_SOURCE.setDriverClassName(ConfigFileReader.getJdbcDriver());
-        DATA_SOURCE.setUrl(ConfigFileReader.getJdbcUrl());
-        DATA_SOURCE.setUsername(ConfigFileReader.getJdbcUsername());
-        DATA_SOURCE.setPassword(ConfigFileReader.getJdbcPassword());
+        DATA_SOURCE.setDriverClassName(ConfigFileManager.getJdbcDriver());
+        DATA_SOURCE.setUrl(ConfigFileManager.getJdbcUrl());
+        DATA_SOURCE.setUsername(ConfigFileManager.getJdbcUsername());
+        DATA_SOURCE.setPassword(ConfigFileManager.getJdbcPassword());
     }
 
     public static Connection getDbConnection() {

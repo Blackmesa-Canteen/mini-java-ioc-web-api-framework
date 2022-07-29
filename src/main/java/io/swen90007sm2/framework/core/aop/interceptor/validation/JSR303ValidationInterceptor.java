@@ -3,7 +3,9 @@ package io.swen90007sm2.framework.core.aop.interceptor.validation;
 import io.swen90007sm2.framework.annotation.validation.Validated;
 import io.swen90007sm2.framework.bean.MethodCalling;
 import io.swen90007sm2.framework.core.aop.interceptor.AbstractInterceptor;
+import io.swen90007sm2.framework.exception.RequestException;
 import io.swen90007sm2.framework.exception.ValidationException;
+import org.apache.commons.lang3.ArrayUtils;
 import org.hibernate.validator.HibernateValidator;
 import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator;
 
@@ -64,6 +66,9 @@ public class JSR303ValidationInterceptor extends AbstractInterceptor {
             // if this param has @Valid anno, validate with JSR303
             if (needValid) {
                 // use validator created by factory to validate the arg, then create result.
+                if (ArrayUtils.isEmpty(methodArgs) || methodArgs[i] == null) {
+                    throw new RequestException("missing input param");
+                }
                 Set<ConstraintViolation<Object>> results = VALIDATOR.validate(methodArgs[i]);
                 if (!results.isEmpty()) {
                     throw new ValidationException(results);

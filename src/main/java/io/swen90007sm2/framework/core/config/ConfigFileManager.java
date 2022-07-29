@@ -10,7 +10,7 @@ import java.util.Properties;
  *
  * @author xiaotian
  */
-public class ConfigFileReader {
+public class ConfigFileManager {
     
     /*
      * props read from the prop config file

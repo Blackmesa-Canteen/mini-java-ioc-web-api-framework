@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 
 public interface IRequestHandler {
 
-    void handle(HttpServletRequest req, HttpServletResponse resp, RequestSessionBean requestSessionBean);
+    void handle(HttpServletRequest req, HttpServletResponse resp, RequestSessionBean requestSessionBean) throws Exception;
 
     static void respondRequestWithJson(R responseObj, HttpServletResponse response) throws IOException {
         if (responseObj != null) {

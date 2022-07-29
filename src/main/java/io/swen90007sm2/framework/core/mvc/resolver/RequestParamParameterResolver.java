@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class RequestParamParameterResolver implements IParameterResolver {
     @Override
-    public Object resolve(RequestSessionBean requestSessionBean, Parameter parameter) {
+    public Object resolve(RequestSessionBean requestSessionBean, Parameter parameter) throws Exception {
         RequestParam requestParamAnno = parameter.getDeclaredAnnotation(RequestParam.class);
         String targetParamName = requestParamAnno.value();
 
