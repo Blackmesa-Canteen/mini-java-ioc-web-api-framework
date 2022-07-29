@@ -44,11 +44,10 @@ public class IocWebApiApplication {
         TomcatServer server = new TomcatServer(hostName, portNumber);
         try {
             server.run();
+            LOGGER.info("Web API App is running at {}:{}. Good luck no bugs mate :)", hostName, portNumber);
         } catch (LifecycleException e) {
             LOGGER.error("tomcat server exception: ", e);
             throw new RuntimeException(e);
         }
-
-        LOGGER.info("Web API App is running at {}:{}. Good luck no bugs mate :)", hostName, portNumber);
     }
 }
