@@ -6,7 +6,6 @@ import io.swen90007sm2.framework.annotation.mvc.Handler;
 import io.swen90007sm2.framework.annotation.mvc.Blo;
 import io.swen90007sm2.framework.core.config.ConfigFileManager;
 import io.swen90007sm2.framework.common.util.ClassLoadUtil;
-import io.swen90007sm2.framework.core.web.servlet.MyDispatcherServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,6 +34,7 @@ public class ClassManager {
 
     static {
         String basePackage = ConfigFileManager.getBasePackageName();
+        LOGGER.info("Scanning project base package: [{}]", basePackage);
         CLASS_SET = ClassLoadUtil.getClassSetUnderPackageName(basePackage);
         LOGGER.info("Scanned {} Classes and interfaces in total.", CLASS_SET.size());
     }
