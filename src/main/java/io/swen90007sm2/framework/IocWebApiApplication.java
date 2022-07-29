@@ -35,7 +35,7 @@ public class IocWebApiApplication {
         AppContextLoader.initAppContext();
 
         // load db connection
-//        DbConnectionHelper.getDbConnection();
+        DbConnectionHelper.getDbConnection();
 
         LOGGER.info("Startup the web server.");
         // start server

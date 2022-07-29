@@ -36,8 +36,7 @@ public class  AppContextLoader {
                 BeanManager.class,
                 InterceptorManager.class,
                 InjectionHelper.class,
-                HandlerManager.class,
-                DbConnectionHelper.class
+                HandlerManager.class
         };
 
         // run static blocks one by one

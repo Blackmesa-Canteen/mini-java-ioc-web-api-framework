@@ -48,6 +48,8 @@ public class DbConnectionHelper {
                 DB_CONNECTION_HOLDER.set(res);
             }
         }
+
+        LOGGER.info("Got JDBC connection: " + res.toString());
         return res;
     }
 
@@ -63,6 +65,7 @@ public class DbConnectionHelper {
                 conn.close();
             }
             DB_CONNECTION_HOLDER.set(null);
+            LOGGER.info("JDBC connection closed ");
         } catch (SQLException e) {
             e.printStackTrace();
         }
