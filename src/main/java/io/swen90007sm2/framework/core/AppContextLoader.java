@@ -18,7 +18,6 @@ import org.slf4j.LoggerFactory;
  * init the framework, perform class scan, and dependency injection
  *
  * @author xiaotain
- * @author tyshawnlee https://github.com/tyshawnlee/handwritten-mvc
  */
 public class  AppContextLoader {
 
