@@ -3,6 +3,11 @@ package io.swen90007sm2.framework.core.aop.processor;
 import io.swen90007sm2.framework.core.aop.interceptor.AbstractInterceptor;
 import io.swen90007sm2.framework.core.aop.proxy.JdkProxy;
 
+/**
+ * jdk enhancer
+ *
+ * @author xiaotian
+ */
 public class JdkAopBeanProcessor extends AbstractAopBeanProcessor{
 
     @Override

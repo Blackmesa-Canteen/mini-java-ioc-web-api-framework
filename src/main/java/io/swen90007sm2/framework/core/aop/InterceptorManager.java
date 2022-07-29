@@ -18,6 +18,8 @@ import java.util.stream.Collectors;
 
 /**
  * helper to load all interceptors
+ *
+ * @author xiaotian
  */
 public class InterceptorManager {
 

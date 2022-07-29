@@ -60,7 +60,7 @@ public class BeanManager {
     /**
      * apply bean post processors to existing bean in the map.
      */
-    public static void applyBeanPostProcessorsToBeanMap() {
+    public static void performBeanPostProcessorsToBeanMap() {
         BEAN_MAP.replaceAll((beanClass, beanInstance) -> {
             IBeanPostProcessor beanPostProcessor = AopBeanPostProcessorFactory.getCorrectBeanPostProcessor(beanClass);
             return beanPostProcessor.postProcessToBean(beanInstance);

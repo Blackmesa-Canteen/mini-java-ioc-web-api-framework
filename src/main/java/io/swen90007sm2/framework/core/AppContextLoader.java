@@ -38,6 +38,6 @@ public class  AppContextLoader {
         }
 
         // perform AOP in BEAN_MAP. bean map includes Component (Handler + Blo + Dao)
-        BeanManager.applyBeanPostProcessorsToBeanMap();
+        BeanManager.performBeanPostProcessorsToBeanMap();
     }
 }
