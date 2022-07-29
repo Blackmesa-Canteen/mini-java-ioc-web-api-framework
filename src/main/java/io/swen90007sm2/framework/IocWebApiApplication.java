@@ -1,8 +1,10 @@
 package io.swen90007sm2.framework;
 
+import io.swen90007sm2.framework.common.util.BannerUtil;
 import io.swen90007sm2.framework.common.util.LogUtil;
 import io.swen90007sm2.framework.core.AppContextLoader;
 import io.swen90007sm2.framework.core.web.TomcatServer;
+import io.swen90007sm2.framework.db.DbConnectionHelper;
 import org.apache.catalina.LifecycleException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,14 +23,19 @@ public class IocWebApiApplication {
      */
     public static void run(String hostName, int portNumber) {
 
+        BannerUtil.printBanner();
+
         LOGGER.info("SWEN90007 mini Java Ioc web Api app framework");
         LOGGER.info("Start to run the IoC Web Api Application.");
 
-        // disable warning message caused by CgLib
+        // mute warning message caused by CgLib
         LogUtil.disableIllegalReflectiveWarning();
 
         // load core modules
         AppContextLoader.initAppContext();
+
+        // load db connection
+//        DbConnectionHelper.getDbConnection();
 
         LOGGER.info("Startup the web server.");
         // start server

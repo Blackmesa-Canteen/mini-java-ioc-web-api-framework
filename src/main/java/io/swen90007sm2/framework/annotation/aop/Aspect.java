@@ -6,7 +6,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Aspect for AOP
+ * Aspect for AOP.
+ *
+ * (Not Supported right now, can only get Component beans that marked with @Aspect.)
  * @author xiaotian
  */
 @Retention(RetentionPolicy.RUNTIME)

@@ -10,6 +10,11 @@ import io.swen90007sm2.framework.core.mvc.resolver.RequestParamParameterResolver
 
 import java.lang.reflect.Parameter;
 
+/**
+ * Factory returns correct param resolver based on method parameter's type
+ *
+ * @author xiaotian
+ */
 public class ParameterResolverFactory {
     public static IParameterResolver get(Parameter parameter) {
         if (parameter.isAnnotationPresent(RequestParam.class)) {
