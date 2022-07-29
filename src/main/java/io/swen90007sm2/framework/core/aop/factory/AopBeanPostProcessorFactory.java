@@ -15,6 +15,8 @@ public class AopBeanPostProcessorFactory {
      * get the bean post processor, if the bean implements interface, use JDK, else use CgLib
      */
     public static IBeanPostProcessor getCorrectBeanPostProcessor(Class<?> targetBean) {
+
+        // use jdk proxy for class that has interface
         if (targetBean.isInterface() || targetBean.getInterfaces().length > 0) {
             return new JdkAopBeanProcessor();
         } else {

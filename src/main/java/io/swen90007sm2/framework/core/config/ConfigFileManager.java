@@ -39,7 +39,7 @@ public class ConfigFileManager {
     /**
      * get application package name
      */
-    public static String getBasePackage() {
+    public static String getBasePackageName() {
         return ConfigFileUtil.getString(CONFIG_FILE_PROPS, ConfigFileConstant.APP_BASE_PACKAGE_NAME);
     }
 

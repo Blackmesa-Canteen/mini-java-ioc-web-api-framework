@@ -26,7 +26,11 @@ public class CglibProxy implements MethodInterceptor {
 
     @Override
     public Object intercept(Object o, Method method, Object[] args, MethodProxy methodProxy) {
+
+        // cache original method calling
         MethodCalling methodCalling = new MethodCalling(targetObj, method, args);
+
+        // enhance the original method calling
         return interceptor.intercept(methodCalling);
     }
 

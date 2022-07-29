@@ -4,7 +4,6 @@ import io.swen90007sm2.framework.common.util.ReflectionUtil;
 import io.swen90007sm2.framework.core.aop.interceptor.AbstractInterceptor;
 import io.swen90007sm2.framework.core.aop.interceptor.validation.JSR303ValidationInterceptor;
 import io.swen90007sm2.framework.core.config.ConfigFileManager;
-import io.swen90007sm2.framework.core.ioc.ClassManager;
 import io.swen90007sm2.framework.exception.InternalException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +29,7 @@ public class InterceptorManager {
 
     static {
         INTERCEPTOR_LIST = new ArrayList<>();
-        String basePackage = ConfigFileManager.getBasePackage();
+        String basePackage = ConfigFileManager.getBasePackageName();
 
         // get subclasses that implmented Interceptor abstract class
         Set<Class<? extends AbstractInterceptor>> interceptorClasses = ReflectionUtil.getSubClass(basePackage, AbstractInterceptor.class);

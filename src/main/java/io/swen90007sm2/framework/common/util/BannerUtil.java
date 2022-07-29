@@ -8,6 +8,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
+/**
+ * helper to print banner
+ *
+ * @author xiaotian
+ */
 public class BannerUtil {
     public static final String CUSTOM_BANNER_NAME = "banner.txt";
 

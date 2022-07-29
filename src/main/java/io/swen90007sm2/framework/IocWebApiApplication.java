@@ -23,6 +23,7 @@ public class IocWebApiApplication {
      */
     public static void run(String hostName, int portNumber) {
 
+        // print banner
         BannerUtil.printBanner();
 
         LOGGER.info("SWEN90007 mini Java Ioc web Api app framework");

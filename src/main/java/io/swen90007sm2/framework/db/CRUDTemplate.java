@@ -20,7 +20,7 @@ import static io.swen90007sm2.framework.db.DbConnectionHelper.getDbConnection;
 /**
  * CRUD template
  *
- * @author tyshawnlee https://github.com/tyshawnlee/handwritten-mvc
+ * @author tyshawnlee https://github.com/tyshawnlee
  */
 public class CRUDTemplate {
 

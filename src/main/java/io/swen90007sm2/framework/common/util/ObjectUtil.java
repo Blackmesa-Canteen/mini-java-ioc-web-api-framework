@@ -4,10 +4,9 @@ import java.beans.PropertyEditor;
 import java.beans.PropertyEditorManager;
 
 /**
- * util for object creation/convertion
+ * util for object convertion.
  *
  * @author xiaotian,
- * @author shuang.kou:https://github.com/Snailclimb/jsoncat
  */
 public class ObjectUtil {
 

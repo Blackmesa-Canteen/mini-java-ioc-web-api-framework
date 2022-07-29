@@ -31,9 +31,11 @@ public class JdkProxy implements InvocationHandler {
      */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+
+        // original method calling, cache it into bean
         MethodCalling methodCalling = new MethodCalling(targetObj, method, args);
 
-        // enhance the original method with interceptor logic
+        // enhance the original method calling with interceptor logic
         return interceptor.intercept(methodCalling);
     }
 

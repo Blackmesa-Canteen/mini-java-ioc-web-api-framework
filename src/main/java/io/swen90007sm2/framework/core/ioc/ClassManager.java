@@ -29,7 +29,7 @@ public class ClassManager {
     }
 
     static {
-        String basePackage = ConfigFileManager.getBasePackage();
+        String basePackage = ConfigFileManager.getBasePackageName();
         CLASS_SET = ClassLoadUtil.getClassSetUnderPackageName(basePackage);
     }
 

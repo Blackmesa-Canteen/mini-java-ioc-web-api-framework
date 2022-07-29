@@ -61,10 +61,7 @@ public class MyDispatcherServlet extends HttpServlet {
         } catch (ConstraintViolationException e) {
             R responseBean = ResponseFactory.getValidationErrResponseBean(e.getConstraintViolations());
             IRequestHandler.respondRequestWithJson(responseBean, resp);
-        } catch (IllegalArgumentException e) {
-            R responseBean = ResponseFactory.getRequestErrorResponseBean(e.toString());
-            IRequestHandler.respondRequestWithJson(responseBean, resp);
-        } catch (RequestException e) {
+        } catch (IllegalArgumentException | RequestException e) {
             R responseBean = ResponseFactory.getRequestErrorResponseBean(e.toString());
             IRequestHandler.respondRequestWithJson(responseBean, resp);
         } catch (InternalException e) {
@@ -103,10 +100,15 @@ public class MyDispatcherServlet extends HttpServlet {
         return requestSessionBean;
     }
 
-
-    private static Map<String, String> parseIncomingPath2pathVariableMap(String requestPath, String url) {
+    /**
+     * parse the path variable from incoming request path based on url defined in handler @HandlesRequest
+     * @param requestPath incoming request
+     * @param urlInHandler url defined in handler @HandlesRequest
+     * @return Map : {variableName: value}
+     */
+    private static Map<String, String> parseIncomingPath2pathVariableMap(String requestPath, String urlInHandler) {
         String[] requestParams = requestPath.split("/");
-        String[] urlParams = url.split("/");
+        String[] urlParams = urlInHandler.split("/");
         Map<String, String> res = new HashMap<>();
         for (int i = 1; i < urlParams.length; i++) {
             res.put(urlParams[i].replace("{", "").replace("}", ""), requestParams[i]);
