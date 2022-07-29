@@ -34,9 +34,6 @@ public class InterceptorManager {
         // get subclasses that implmented Interceptor abstract class
         Set<Class<? extends AbstractInterceptor>> interceptorClasses = ReflectionUtil.getSubClass(basePackage, AbstractInterceptor.class);
 
-//        // get @Aspect class
-//        Set<Class<?>> aspectClasses = ClassManager.getAspectClassSet();
-
         // traverse all intercepter classes and instantiate them
         interceptorClasses.forEach(interceptorClass -> {
             try {
@@ -51,7 +48,7 @@ public class InterceptorManager {
         // add jsr303 interceptor
         INTERCEPTOR_LIST.add(new JSR303ValidationInterceptor());
 
-        // sort by order
+        // sort interceptor list by order
         INTERCEPTOR_LIST = INTERCEPTOR_LIST.stream().sorted(
                 Comparator.comparing(AbstractInterceptor::getOrder)
         ).collect(Collectors.toList());

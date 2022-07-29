@@ -58,7 +58,7 @@ public class GetRequestHandler implements IRequestHandler {
                 }
             }
 
-            Object handlerBean = BeanManager.getBean(worker.getHandlerClazz());
+            Object handlerBean = BeanManager.getBeanFromBeanMapByClass(worker.getHandlerClazz());
             Object methodCallingResult = ReflectionUtil.invokeMethod(handlerBean, targetMethod, paramObjList.toArray());
 
             try {
@@ -74,12 +74,10 @@ public class GetRequestHandler implements IRequestHandler {
 
     }
 
-
-
     /**
      * get the query parameters. e.g. /user?name=233, get Map {'name} -> '233'}
      */
-    private Map<String, String> getQueryParams(String url) {
+    private Map<String, String> parseQueryParamFromUrlToMap(String url) {
         return UrlUtil.getQueryParamMap(url);
     }
 }

@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
- * servlet need to be run at the start of the application
+ * NIO servlet need to be run at the start of the application
  * This is a RESTful JSON servlet
  *
  * @author xiaotian

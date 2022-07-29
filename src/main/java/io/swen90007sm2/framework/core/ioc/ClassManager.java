@@ -79,17 +79,6 @@ public class ClassManager {
         return set;
     }
 
-//    public static Set<Class<?>> getAspectClassSet() {
-//        Set<Class<?>> set = new HashSet<>();
-//        for (Class<?> clazz : CLASS_SET) {
-//            if (clazz.isAnnotationPresent(Aspect.class)) {
-//                set.add(clazz);
-//            }
-//        }
-//
-//        return set;
-//    }
-
     public static Set<Class<?>> getComponentAnnotatedClassSet() {
         Set<Class<?>> set = new HashSet<>();
         for (Class<?> clazz : CLASS_SET) {

@@ -49,8 +49,9 @@ public class BeanManager {
      * get bean object from container by class object
      */
     @SuppressWarnings("unchecked")
-    public static <T> T getBean (Class<T> clazz) {
+    public static <T> T getBeanFromBeanMapByClass(Class<T> clazz) {
         if (!BEAN_MAP.containsKey(clazz)) {
+            LOGGER.error("Can not get bean by class: [{}]", clazz.getName());
             throw new RuntimeException("Can not get bean by class object: " + clazz);
         }
 

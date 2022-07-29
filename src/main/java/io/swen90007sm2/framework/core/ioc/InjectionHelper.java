@@ -18,7 +18,6 @@ import java.util.Set;
  * core helper for dependency injection
  *
  * @author xiaotian
- * @author tyshawnlee https://github.com/tyshawnlee/handwritten-mvc
  */
 public class InjectionHelper {
 

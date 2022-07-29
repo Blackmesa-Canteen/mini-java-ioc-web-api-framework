@@ -56,7 +56,7 @@ public class PostRequestHandler implements IRequestHandler {
                 }
             }
 
-            Object handlerBean = BeanManager.getBean(worker.getHandlerClazz());
+            Object handlerBean = BeanManager.getBeanFromBeanMapByClass(worker.getHandlerClazz());
             Object methodCallingResult = ReflectionUtil.invokeMethod(handlerBean, targetMethod, paramObjList.toArray());
 
             try {

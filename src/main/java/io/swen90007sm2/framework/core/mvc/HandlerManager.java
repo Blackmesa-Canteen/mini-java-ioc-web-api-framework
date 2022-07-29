@@ -53,7 +53,6 @@ public class HandlerManager {
             requestRootPath += basePathFromAnno;
         }
 
-
         if (ArrayUtils.isNotEmpty(handlerMethods)) {
             for (Method handlerMethod : handlerMethods) {
                 // check RequestMapper annotation on this method

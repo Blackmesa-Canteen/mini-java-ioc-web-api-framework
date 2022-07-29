@@ -18,7 +18,6 @@ import java.util.jar.JarFile;
  * Scan and load class file!
  *
  * @author xiaotian
- * @author tyshawnlee https://github.com/tyshawnlee/handwritten-mvc
  */
 public class ClassLoadUtil {
 
@@ -38,7 +37,6 @@ public class ClassLoadUtil {
 
     /**
      * load class, user can decide whether initialize the class or not (load->link->initialize).
-     *
      * initialize: init default value + run static code blocks in class file.
      */
     public static Class<?> loadClass(String className, boolean isInitialized) {

@@ -11,6 +11,7 @@ import java.util.Map;
  * convert incoming query string to annotation's declared type
  *
  * @author xiaotian
+ * @author shuang.kou:https://github.com/Snailclimb/jsoncat
  */
 public class QueryParamParameterResolver implements IParameterResolver {
     @Override
@@ -18,7 +19,7 @@ public class QueryParamParameterResolver implements IParameterResolver {
         QueryParam queryParamAnno = parameter.getDeclaredAnnotation(QueryParam.class);
         String targetParamName = queryParamAnno.value();
 
-        // this map has been put values from the incoming request.
+        // this map has been put query param key-values from the incoming request.
         Map<String, String> queryParameterMap = requestSessionBean.getQueryParameterMap();
         String targetParamValue = queryParameterMap.get(targetParamName);
 

@@ -29,6 +29,7 @@ public class  AppContextLoader {
     public static void initAppContext() {
 
         // the order should not be changed!
+        // Instantiate all beans before Injection can avoid circular reference issue.
         Class<?>[] classLoadList = {
                 ConfigFileManager.class,
                 ClassManager.class,
