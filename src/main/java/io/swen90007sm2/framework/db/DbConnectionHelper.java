@@ -3,31 +3,30 @@ package io.swen90007sm2.framework.db;
 import io.swen90007sm2.framework.core.config.ConfigFileManager;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * A helper for database connection with JDBC
  *
  * @author xiaotian
  */
-public class DbHelper {
+public class DbConnectionHelper {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DbHelper.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DbConnectionHelper.class);
 
     private static final ThreadLocal<Connection> DB_CONNECTION_HOLDER;
 
-    private static final QueryRunner QUERY_RUNNER;
 
     private static final BasicDataSource DATA_SOURCE;
 
     static {
         DB_CONNECTION_HOLDER = new ThreadLocal<>();
-        QUERY_RUNNER = new QueryRunner();
 
         DATA_SOURCE = new BasicDataSource();
         DATA_SOURCE.setDriverClassName(ConfigFileManager.getJdbcDriver());
@@ -51,32 +50,20 @@ public class DbHelper {
         return res;
     }
 
-    /**
-     * query the database, and map the result to the java entity
-     */
-    public static  <T> T queryToEntity(Class<T> entityClass, String sqlText, Object... params) {
-        T res;
+    public static void closeDbConnection(Connection conn, Statement st, ResultSet rs) {
         try {
-            Connection dbConnection = getDbConnection();
-            res = QUERY_RUNNER.query(dbConnection, sqlText, new BeanHandler<>(entityClass), params);
+            if(rs != null){
+                rs.close();
+            }
+            if(st != null){
+                st.close();
+            }
+            if(conn != null){
+                conn.close();
+            }
+            DB_CONNECTION_HOLDER.set(null);
         } catch (SQLException e) {
-            LOGGER.error("query db exception: ", e);
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
-
-        return res;
     }
-
-    /**
-     * Insert
-     */
-
-    /**
-     * Update
-     */
-
-    /**
-     * delete
-     */
-
 }
