@@ -20,10 +20,24 @@ public class TestHandler {
     private IUserBlo userService;
 
     @HandlesRequest(path = "/test/{id}", method = RequestMethod.GET)
-    public R getUser(@PathVariable("id") long id) {
+    public R circularReferenceTestHandler(@PathVariable("id") long id) {
 
         User user = userService.getUserById(id);
         user.setName("测试用");
+        return R.ok().setData(user);
+    }
+
+    @HandlesRequest(path = "/test2var/{id}/{name}", method = RequestMethod.GET)
+    public R getUser(@PathVariable("id") long id, @PathVariable("name") String name) {
+
+        User user = new User(id, name, 233);
+        return R.ok().setData(user);
+    }
+
+    @HandlesRequest(path = "/test/{id}/posts", method = RequestMethod.GET)
+    public R getUser(@PathVariable("id") long id) {
+
+        User user = new User(id, "2ds", 233);
         return R.ok().setData(user);
     }
 

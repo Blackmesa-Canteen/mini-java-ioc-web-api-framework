@@ -28,7 +28,7 @@ public class UserHandler {
     }
 
     @HandlesRequest(path = "/user", method = RequestMethod.GET)
-    public R getUser(@RequestParam(value = "name") String name, @RequestParam("id") Long id, @RequestParam("age") Integer age) {
+    public R getUser(@QueryParam(value = "name") String name, @QueryParam("id") Long id, @QueryParam("age") Integer age) {
         User user = new User(id, name, age);
 
         return R.ok().setData(user);

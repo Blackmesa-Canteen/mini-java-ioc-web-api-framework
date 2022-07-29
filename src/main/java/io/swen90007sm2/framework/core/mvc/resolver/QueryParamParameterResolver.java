@@ -1,6 +1,6 @@
 package io.swen90007sm2.framework.core.mvc.resolver;
 
-import io.swen90007sm2.framework.annotation.mvc.RequestParam;
+import io.swen90007sm2.framework.annotation.mvc.QueryParam;
 import io.swen90007sm2.framework.bean.RequestSessionBean;
 import io.swen90007sm2.framework.common.util.ObjectUtil;
 
@@ -12,21 +12,21 @@ import java.util.Map;
  *
  * @author xiaotian
  */
-public class RequestParamParameterResolver implements IParameterResolver {
+public class QueryParamParameterResolver implements IParameterResolver {
     @Override
     public Object resolve(RequestSessionBean requestSessionBean, Parameter parameter) throws Exception {
-        RequestParam requestParamAnno = parameter.getDeclaredAnnotation(RequestParam.class);
-        String targetParamName = requestParamAnno.value();
+        QueryParam queryParamAnno = parameter.getDeclaredAnnotation(QueryParam.class);
+        String targetParamName = queryParamAnno.value();
 
         // this map has been put values from the incoming request.
         Map<String, String> queryParameterMap = requestSessionBean.getQueryParameterMap();
         String targetParamValue = queryParameterMap.get(targetParamName);
 
         if (targetParamValue == null) {
-            if (requestParamAnno.require() && requestParamAnno.defaultValue().isEmpty()) {
+            if (queryParamAnno.require() && queryParamAnno.defaultValue().isEmpty()) {
                 throw new IllegalArgumentException("The specified parameter " + targetParamName + " can not be null!");
             } else {
-                targetParamValue = requestParamAnno.defaultValue();
+                targetParamValue = queryParamAnno.defaultValue();
             }
         }
 

@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
  */
 @Target({ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface RequestParam {
+public @interface QueryParam {
     String value();
 
     boolean require() default false;
