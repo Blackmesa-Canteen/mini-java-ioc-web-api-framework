@@ -16,7 +16,7 @@ import java.lang.reflect.Parameter;
  * @author xiaotian
  */
 public class ParameterResolverFactory {
-    public static IParameterResolver get(Parameter parameter) {
+    public static IParameterResolver getResolverForParameter(Parameter parameter) {
         if (parameter.isAnnotationPresent(RequestParam.class)) {
             return new RequestParamParameterResolver();
         }

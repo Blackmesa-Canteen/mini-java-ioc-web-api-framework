@@ -15,6 +15,8 @@ import java.util.Set;
  * Reflection Utils, including instantiate new object, invoke a method and so on, based on class object loaded by ClassLoadUtil.
  *
  * @author Xiaotian
+ * @author tyshawnlee https://github.com/tyshawnlee/handwritten-mvc
+ * @author shuang.kou:https://github.com/Snailclimb/jsoncat
  */
 public class ReflectionUtil {
 
@@ -35,14 +37,6 @@ public class ReflectionUtil {
     }
 
     /**
-     * instantiate an object with the className, and initialize it (set default value, run static code blocks)
-     */
-    public static Object newInstance(String className) {
-        Class<?> clazz = ClassLoadUtil.loadClass(className);
-        return newInstance(clazz);
-    }
-
-    /**
      * invoke a method in an object
      */
     public static Object invokeMethod(Object object, Method method, Object... args) {
@@ -52,7 +46,7 @@ public class ReflectionUtil {
             result = method.invoke(object, args);
         } catch (Throwable e) {
             if (e.getCause() != null && e.getCause() instanceof ConstraintViolationException) {
-                LOGGER.error("invoke method param validation, exception: " + e.toString());
+                LOGGER.error("invoke method param validation, exception: " + e);
                 throw (ConstraintViolationException) e.getCause();
             } else if (e.getCause() instanceof RequestException) {
                 throw (RequestException) e.getCause();

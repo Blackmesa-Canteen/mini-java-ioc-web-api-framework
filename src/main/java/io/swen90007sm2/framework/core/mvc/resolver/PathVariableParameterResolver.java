@@ -11,6 +11,7 @@ import java.util.Map;
  * a helper for parsing PathVariable parameter
  *
  * @author xiaotian
+ * @author shuang.kou:https://github.com/Snailclimb/jsoncat
  */
 public class PathVariableParameterResolver implements IParameterResolver {
     @Override

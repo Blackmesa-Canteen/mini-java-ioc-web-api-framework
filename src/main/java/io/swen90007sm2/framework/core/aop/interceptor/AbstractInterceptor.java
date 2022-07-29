@@ -7,6 +7,7 @@ import io.swen90007sm2.framework.bean.MethodCalling;
  * interceptor super class
  *
  * @author xiaotian
+ * @author shuang.kou:https://github.com/Snailclimb/jsoncat
  */
 public abstract class AbstractInterceptor {
 

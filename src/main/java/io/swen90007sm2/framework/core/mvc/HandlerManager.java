@@ -72,10 +72,4 @@ public class HandlerManager {
             }
         }
     }
-
-//    public static Worker getWorker(String requestMethodText, String requestPath) {
-//        Request request = new Request(requestMethodText, requestPath);
-//        return REQUEST_WORKER_MAP.get(request);
-//    }
-
 }

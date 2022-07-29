@@ -12,6 +12,7 @@ import java.lang.reflect.Method;
  * Cglib proxy without Interface support, use byte code of java.
  *
  * @author xiaotian
+ * @author shuang.kou:https://github.com/Snailclimb/jsoncat
  */
 public class CglibProxy implements MethodInterceptor {
 

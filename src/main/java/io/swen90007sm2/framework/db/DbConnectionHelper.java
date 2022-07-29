@@ -15,6 +15,7 @@ import java.sql.Statement;
  * A helper for database connection with JDBC
  *
  * @author xiaotian
+ * @author tyshawnlee https://github.com/tyshawnlee/handwritten-mvc
  */
 public class DbConnectionHelper {
 

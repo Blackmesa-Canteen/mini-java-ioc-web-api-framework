@@ -14,6 +14,7 @@ import java.util.Properties;
  * application.properties should locate in your application's resources dir.
  *
  * @author xiaotian
+ * @author tyshawnlee https://github.com/tyshawnlee/handwritten-mvc
  */
 
 public final class ConfigFileUtil {

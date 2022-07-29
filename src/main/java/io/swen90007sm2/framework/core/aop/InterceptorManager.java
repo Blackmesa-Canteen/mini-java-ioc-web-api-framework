@@ -17,9 +17,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * helper to load all interceptors
+ * helper to load all interceptors.
  *
  * @author xiaotian
+ * @author shuang.kou:https://github.com/Snailclimb/jsoncat
  */
 public class InterceptorManager {
 
@@ -47,12 +48,6 @@ public class InterceptorManager {
                 throw new InternalException("Server error, try again later");
             }
         });
-
-//        aspectClasses.forEach(aspectClass -> {
-//            Object instance = ReflectionUtil.newInstance(aspectClass);
-//            // aspect interceptor
-//            Interceptor interceptor = new nternallyAspectInterceptor(instance);
-//        });
 
         // add jsr303 interceptor
         INTERCEPTOR_LIST.add(new JSR303ValidationInterceptor());

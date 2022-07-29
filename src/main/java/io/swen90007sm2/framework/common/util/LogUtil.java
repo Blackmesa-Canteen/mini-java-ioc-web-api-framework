@@ -4,6 +4,12 @@ import sun.misc.Unsafe;
 
 import java.lang.reflect.Field;
 
+/**
+ * log util for disable redundant warning
+ *
+ * @author xiaotian
+ * @author StackOverflow
+ */
 public class LogUtil {
 
     public static void disableIllegalReflectiveWarning() {

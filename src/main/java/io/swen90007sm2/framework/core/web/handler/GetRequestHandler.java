@@ -51,7 +51,7 @@ public class GetRequestHandler implements IRequestHandler {
             // traverse params in handler method, then generate correct param object for method calling
             for (Parameter param : targetMethodParameters) {
                 // get correct resolver type for the param
-                IParameterResolver parameterResolver = ParameterResolverFactory.get(param);
+                IParameterResolver parameterResolver = ParameterResolverFactory.getResolverForParameter(param);
                 if (parameterResolver != null) {
                     Object paramObj = parameterResolver.resolve(requestSessionBean, param);
                     paramObjList.add(paramObj);

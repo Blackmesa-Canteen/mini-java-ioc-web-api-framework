@@ -18,6 +18,7 @@ import java.util.Set;
  * interceptor to perform JSR303 validation
  *
  * @author xiaotian
+ * @author shuang.kou:https://github.com/Snailclimb/jsoncat
  */
 public class JSR303ValidationInterceptor extends AbstractInterceptor {
 

@@ -1,6 +1,5 @@
 package io.swen90007sm2.framework.core.ioc;
 
-import io.swen90007sm2.framework.annotation.aop.Aspect;
 import io.swen90007sm2.framework.annotation.ioc.Component;
 import io.swen90007sm2.framework.annotation.mvc.Dao;
 import io.swen90007sm2.framework.annotation.mvc.Handler;
@@ -16,6 +15,7 @@ import java.util.Set;
  * a helper to hold all class objects
  *
  * @author xiaotian
+ * @author tyshawnlee https://github.com/tyshawnlee/handwritten-mvc
  */
 public class ClassManager {
 
@@ -70,16 +70,16 @@ public class ClassManager {
         return set;
     }
 
-    public static Set<Class<?>> getAspectClassSet() {
-        Set<Class<?>> set = new HashSet<>();
-        for (Class<?> clazz : CLASS_SET) {
-            if (clazz.isAnnotationPresent(Aspect.class)) {
-                set.add(clazz);
-            }
-        }
-
-        return set;
-    }
+//    public static Set<Class<?>> getAspectClassSet() {
+//        Set<Class<?>> set = new HashSet<>();
+//        for (Class<?> clazz : CLASS_SET) {
+//            if (clazz.isAnnotationPresent(Aspect.class)) {
+//                set.add(clazz);
+//            }
+//        }
+//
+//        return set;
+//    }
 
     public static Set<Class<?>> getComponentAnnotatedClassSet() {
         Set<Class<?>> set = new HashSet<>();

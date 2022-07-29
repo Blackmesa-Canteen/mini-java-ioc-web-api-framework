@@ -17,6 +17,11 @@ import java.util.Map;
 
 import static io.swen90007sm2.framework.db.DbConnectionHelper.getDbConnection;
 
+/**
+ * CRUD template
+ *
+ * @author tyshawnlee https://github.com/tyshawnlee/handwritten-mvc
+ */
 public class CRUDTemplate {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CRUDTemplate.class);

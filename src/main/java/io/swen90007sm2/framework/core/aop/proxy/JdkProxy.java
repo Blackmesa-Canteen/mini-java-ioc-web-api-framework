@@ -11,6 +11,7 @@ import java.lang.reflect.Proxy;
  * jak proxy is used when object uses a Interface, otherwise, use CGLib to enhance byte code
  *
  * @author xiaotian
+ * @author shuang.kou:https://github.com/Snailclimb/jsoncat
  */
 public class JdkProxy implements InvocationHandler {
 

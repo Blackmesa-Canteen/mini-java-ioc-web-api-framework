@@ -6,15 +6,15 @@ import java.beans.PropertyEditorManager;
 /**
  * util for object creation/convertion
  *
- * @author xiaotian
+ * @author xiaotian,
+ * @author shuang.kou:https://github.com/Snailclimb/jsoncat
  */
 public class ObjectUtil {
 
     /**
-     * convert string to object with spefic type
+     * convert string to object with spefic type，
+     * used to convert incoming param to the corresponding type declared in handler method param
      *
-     * @param srcText string to be converted
-     * @param targetClass target pbkectr class
      */
     public static Object convertString2Object(String srcText, Class<?> targetClass) {
         PropertyEditor editor = PropertyEditorManager.findEditor(targetClass);

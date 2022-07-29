@@ -19,6 +19,7 @@ import java.util.jar.JarFile;
  * Scan and load class file!
  *
  * @author xiaotian
+ * @author tyshawnlee https://github.com/tyshawnlee/handwritten-mvc
  */
 public class ClassLoadUtil {
 

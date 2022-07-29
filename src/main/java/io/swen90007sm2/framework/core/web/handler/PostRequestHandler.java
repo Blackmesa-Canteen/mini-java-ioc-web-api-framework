@@ -49,7 +49,7 @@ public class PostRequestHandler implements IRequestHandler {
 
             List<Object> paramObjList = new ArrayList<>();
             for (Parameter parameter : targetMethodParameters) {
-                IParameterResolver parameterResolver = ParameterResolverFactory.get(parameter);
+                IParameterResolver parameterResolver = ParameterResolverFactory.getResolverForParameter(parameter);
                 if (parameterResolver != null) {
                     Object param = parameterResolver.resolve(requestSessionBean, parameter);
                     paramObjList.add(param);

@@ -13,6 +13,7 @@ import java.lang.reflect.Parameter;
  * convert incoming request json body into a specific entity as the same as parameter type
  *
  * @author xiaotian
+ * @author shuang.kou:https://github.com/Snailclimb/jsoncat
  */
 public class RequestJsonParamResolver implements IParameterResolver {
 

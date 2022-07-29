@@ -19,6 +19,14 @@ This Framework can help you to build up a RESTful web api server quickly.
 # demo
 See api-server-example project in the repo.
 
+# Open Source Projects
+
+This project is inspired by the other project:
+
+- [jsoncat](https://github.com/Snailclimb/jsoncat)
+- [handwritten-mvc](https://github.com/tyshawnlee/handwritten-mvc)
+- [spring-boot](https://github.com/spring-projects/spring-boot)
+
 # license
 ```
 MIT License
