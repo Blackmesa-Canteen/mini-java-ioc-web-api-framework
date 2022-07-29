@@ -3,11 +3,14 @@ package io.swen90007sm2.framework.core.aop.interceptor.validation;
 import io.swen90007sm2.framework.annotation.validation.Validated;
 import io.swen90007sm2.framework.bean.MethodCalling;
 import io.swen90007sm2.framework.core.aop.interceptor.AbstractInterceptor;
+import io.swen90007sm2.framework.core.ioc.ClassManager;
 import io.swen90007sm2.framework.exception.RequestException;
 import io.swen90007sm2.framework.exception.ValidationException;
 import org.apache.commons.lang3.ArrayUtils;
 import org.hibernate.validator.HibernateValidator;
 import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.validation.*;
 import java.lang.annotation.Annotation;
@@ -22,6 +25,7 @@ import java.util.Set;
  */
 public class JSR303ValidationInterceptor extends AbstractInterceptor {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractInterceptor.class);
     private final Validator VALIDATOR;
 
     public JSR303ValidationInterceptor() {
@@ -50,6 +54,10 @@ public class JSR303ValidationInterceptor extends AbstractInterceptor {
 
     @Override
     public Object intercept(MethodCalling methodCalling) {
+
+        LOGGER.info("JSR303 Validation Interceptor Calling for [{}] 's [{}] handler",
+                methodCalling.getTargetObject().getClass().getName(),
+                methodCalling.getTargetMethod().getName());
         // when call methods from this bean, interception will be triggered
         // get annotations from param
         Annotation[][] paramAnnos = methodCalling.getTargetMethod().getParameterAnnotations();

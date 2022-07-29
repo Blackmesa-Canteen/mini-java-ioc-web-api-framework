@@ -55,6 +55,8 @@ public class InterceptorManager {
         INTERCEPTOR_LIST = INTERCEPTOR_LIST.stream().sorted(
                 Comparator.comparing(AbstractInterceptor::getOrder)
         ).collect(Collectors.toList());
+
+        LOGGER.info("Instantiated {} interceptors.", INTERCEPTOR_LIST.size());
     }
 
     public static List<AbstractInterceptor> getInterceptorList() {

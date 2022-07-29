@@ -15,7 +15,6 @@ import java.util.jar.JarFile;
 
 /**
  * class manager, handler reflection logic.
- *
  * Scan and load class file!
  *
  * @author xiaotian

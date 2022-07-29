@@ -29,8 +29,9 @@ public class IocWebApiApplication {
         LOGGER.info("SWEN90007 mini Java Ioc web Api app framework");
         LOGGER.info("Start to run the IoC Web Api Application.");
 
-        // mute warning message caused by CgLib
+        // mute useless message caused by CgLib and Tomcat
         LogUtil.disableIllegalReflectiveWarning();
+        LogUtil.disableTomcatInitWarning();
 
         // load core modules
         AppContextLoader.initAppContext();
@@ -48,6 +49,6 @@ public class IocWebApiApplication {
             throw new RuntimeException(e);
         }
 
-        LOGGER.info("Application is running. Good luck no bugs mate :)");
+        LOGGER.info("Web API App is running at {}:{}. Good luck no bugs mate :)", hostName, portNumber);
     }
 }

@@ -6,6 +6,8 @@ import io.swen90007sm2.framework.core.aop.factory.AopBeanPostProcessorFactory;
 import io.swen90007sm2.framework.core.aop.processor.CgLibAopBeanProcessor;
 import io.swen90007sm2.framework.core.aop.processor.IBeanPostProcessor;
 import org.apache.commons.lang3.ArrayUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 import java.util.Iterator;
@@ -19,6 +21,8 @@ import java.util.Set;
  * @author tyshawnlee https://github.com/tyshawnlee/handwritten-mvc
  */
 public class InjectionHelper {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(InjectionHelper.class);
 
     static {
         Map<Class<?>, Object> beanMap = BeanManager.getBeanMap();
@@ -62,12 +66,18 @@ public class InjectionHelper {
                 if (fieldInstance != null) {
                     // if beanInstance exists, do injection
 
-                    // AOP enhanced object injection to the field TODO to be tested
+                    // AOP enhanced object injection to the field
                     IBeanPostProcessor beanPostProcessor = AopBeanPostProcessorFactory.getCorrectBeanPostProcessor(field.getType());
                     fieldInstance = beanPostProcessor.postProcessToBean(fieldInstance);
 
                     // attach the bean result to the field
                     ReflectionUtil.setField(beanInstance, field, fieldInstance);
+
+                    LOGGER.info("Dependency Injection: Bean [{}] to [{}]'s field [{}]",
+                            fieldInstance.getClass().getName(),
+                            beanInstance.getClass().getName(),
+                            fieldClass.getName()
+                            );
                 }
             }
         }

@@ -3,6 +3,7 @@ package io.swen90007sm2.framework.common.util;
 import sun.misc.Unsafe;
 
 import java.lang.reflect.Field;
+import java.util.logging.Level;
 
 /**
  * log util for disable redundant warning
@@ -24,5 +25,12 @@ public class LogUtil {
         } catch (Exception e) {
             // ignore
         }
+    }
+
+    /**
+     * hide tomcat-embed log
+     */
+    public static void disableTomcatInitWarning() {
+        System.setProperty("java.util.logging.SimpleFormatter.format", "");
     }
 }

@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -39,7 +40,7 @@ public class MyDispatcherServlet extends HttpServlet {
         String requestPath = req.getServletPath();
         req.setCharacterEncoding("utf-8");
 
-        LOGGER.info("incoming request: " + requestMethod + " , path: " + requestPath);
+        LOGGER.info("Incoming request: [{}] {}",requestMethod, requestPath);
 
         try {
             // generate request-response session bean for this new serving session
@@ -53,6 +54,8 @@ public class MyDispatcherServlet extends HttpServlet {
                 LOGGER.warn("handler mismatched with request: [" + requestMethod + "] " + requestPath);
                 throw new ResourceNotFoundException("handler mismatched with request: [" + requestMethod + "] " + requestPath);
             }
+
+            LOGGER.info("Finished handling request: [{}] {}", requestMethod, requestPath);
 
             // returns exception json
         } catch (ResourceNotFoundException e) {
@@ -94,6 +97,9 @@ public class MyDispatcherServlet extends HttpServlet {
                         );
 
                         requestSessionBean.setWorkerNeeded(workerBean);
+                        LOGGER.info("Handler Mapping: Handler is {}, method is {}",
+                                workerBean.getHandlerClazz().getName(),
+                                workerBean.getHandlerMethod().getName());
                     }
                 });
 

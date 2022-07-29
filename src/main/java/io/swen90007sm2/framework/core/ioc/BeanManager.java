@@ -3,6 +3,8 @@ package io.swen90007sm2.framework.core.ioc;
 import io.swen90007sm2.framework.common.util.ReflectionUtil;
 import io.swen90007sm2.framework.core.aop.factory.AopBeanPostProcessorFactory;
 import io.swen90007sm2.framework.core.aop.processor.IBeanPostProcessor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +18,8 @@ import java.util.Set;
  * @author tyshawnlee https://github.com/tyshawnlee/handwritten-mvc
  */
 public class BeanManager {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(BeanManager.class);
 
     /*
      * the map contains all bean objects
@@ -37,6 +41,8 @@ public class BeanManager {
             Object object = ReflectionUtil.newInstance(clazz);
             BEAN_MAP.put(clazz, object);
         }
+
+        LOGGER.info("Instantiated {} instances in the bean container.", BEAN_MAP.size());
     }
 
     /**

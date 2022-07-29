@@ -6,6 +6,9 @@ import io.swen90007sm2.framework.annotation.mvc.Handler;
 import io.swen90007sm2.framework.annotation.mvc.Blo;
 import io.swen90007sm2.framework.core.config.ConfigFileManager;
 import io.swen90007sm2.framework.common.util.ClassLoadUtil;
+import io.swen90007sm2.framework.core.web.servlet.MyDispatcherServlet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.annotation.Annotation;
 import java.util.HashSet;
@@ -19,6 +22,8 @@ import java.util.Set;
  */
 public class ClassManager {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClassManager.class);
+
     /**
      * a set holds all class object of this project
      */
@@ -31,6 +36,7 @@ public class ClassManager {
     static {
         String basePackage = ConfigFileManager.getBasePackageName();
         CLASS_SET = ClassLoadUtil.getClassSetUnderPackageName(basePackage);
+        LOGGER.info("Scanned {} Classes and interfaces in total.", CLASS_SET.size());
     }
 
     /**
@@ -45,6 +51,7 @@ public class ClassManager {
             }
         }
 
+        LOGGER.info("Scanned {} Handler Classes.", set.size());
         return set;
     }
 
@@ -56,6 +63,7 @@ public class ClassManager {
             }
         }
 
+        LOGGER.info("Scanned {} Blo Classes.", set.size());
         return set;
     }
 
@@ -67,6 +75,7 @@ public class ClassManager {
             }
         }
 
+        LOGGER.info("Scanned {} Dao Classes.", set.size());
         return set;
     }
 
@@ -89,6 +98,7 @@ public class ClassManager {
             }
         }
 
+        LOGGER.info("Scanned {} Component Classes.", set.size());
         return set;
     }
 

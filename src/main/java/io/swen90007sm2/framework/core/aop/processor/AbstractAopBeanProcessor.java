@@ -3,6 +3,8 @@ package io.swen90007sm2.framework.core.aop.processor;
 
 import io.swen90007sm2.framework.core.aop.InterceptorManager;
 import io.swen90007sm2.framework.core.aop.interceptor.AbstractInterceptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -12,6 +14,8 @@ import java.util.List;
  */
 public abstract class AbstractAopBeanProcessor implements IBeanPostProcessor{
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractAopBeanProcessor.class);
+
     // decorate the target bean level by level with interceptor
     @Override
     public Object postProcessToBean(Object bean) {
@@ -19,6 +23,9 @@ public abstract class AbstractAopBeanProcessor implements IBeanPostProcessor{
         List<AbstractInterceptor> interceptorList = InterceptorManager.getInterceptorList();
         for (AbstractInterceptor interceptor : interceptorList) {
             if (interceptor.supports(bean)) {
+                LOGGER.info("AOP enhanced [{}] with interceptor [{}]",
+                        enhancedBean.getClass().getName(),
+                        interceptor.getClass().getName());
                 enhancedBean = enhanceBean(enhancedBean, interceptor);
             }
         }
