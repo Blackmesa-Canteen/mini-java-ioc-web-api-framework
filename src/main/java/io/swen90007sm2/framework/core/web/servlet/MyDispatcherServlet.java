@@ -44,6 +44,8 @@ public class MyDispatcherServlet extends HttpServlet {
         try {
             // generate request-response session bean for this new serving session
             RequestSessionBean sessionBean = genRequestSessionBean(requestMethod, requestPath);
+            sessionBean.setHttpServletRequest(req);
+            sessionBean.setHttpServletResponse(resp);
 
             IRequestHandler requestHandler = RequestHandlerFactory.get(requestMethod);
             if (sessionBean.getWorkerNeeded() != null) {

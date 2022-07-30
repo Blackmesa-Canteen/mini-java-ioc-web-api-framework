@@ -2,6 +2,8 @@ package io.swen90007sm2.framework.bean;
 
 import org.apache.commons.collections4.MapUtils;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +20,10 @@ public class RequestSessionBean {
      * the handler method bean that is needed for this serving session
      */
     private Worker workerNeeded;
+
+    // TODO
+    private HttpServletRequest httpServletRequest;
+    private HttpServletResponse httpServletResponse;
 
     /**
      * param: /get/id/2
@@ -68,6 +74,22 @@ public class RequestSessionBean {
 
     public void setWorkerNeeded(Worker workerNeeded) {
         this.workerNeeded = workerNeeded;
+    }
+
+    public HttpServletRequest getHttpServletRequest() {
+        return httpServletRequest;
+    }
+
+    public void setHttpServletRequest(HttpServletRequest httpServletRequest) {
+        this.httpServletRequest = httpServletRequest;
+    }
+
+    public HttpServletResponse getHttpServletResponse() {
+        return httpServletResponse;
+    }
+
+    public void setHttpServletResponse(HttpServletResponse httpServletResponse) {
+        this.httpServletResponse = httpServletResponse;
     }
 
     @Override

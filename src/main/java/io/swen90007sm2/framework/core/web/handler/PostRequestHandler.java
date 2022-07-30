@@ -29,16 +29,48 @@ public class PostRequestHandler implements IRequestHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PostRequestHandler.class);
     public static final String APPLICATION_JSON = "application/json";
+    public static final String MULTIPART_FORM_DATA = "multipart/form-data";
 
     @Override
     public void handle(HttpServletRequest req, HttpServletResponse resp, RequestSessionBean requestSessionBean) throws Exception {
         String requestPath = req.getServletPath();
 
-        if (!req.getContentType().equals(APPLICATION_JSON)) {
-            LOGGER.error("only receive application/json type data in POST/PUT/DELETE, err: " + requestPath);
-            throw new RequestException("only receive application/json type data in POST/PUT/DELETE");
-        }
 
+
+        if (req.getContentType().equals(APPLICATION_JSON)) {
+            handleJsonRequest(req, resp, requestSessionBean);
+
+        } else if (req.getContentType().equals(MULTIPART_FORM_DATA)) {
+            // TODO 支持文件上传下载？？？ https://www.cnblogs.com/JiangLai/p/9579192.html
+            ;
+
+        } else {
+            LOGGER.error("only receive application/json or multipart/form-data body in POST/PUT/DELETE, err path: [{}]: ", requestPath);
+            throw new RequestException("only receive application/json or multipart/form-data body in POST/PUT/DELETE");
+        }
+    }
+
+    private static void handleFormDataRequest(HttpServletRequest req, HttpServletResponse resp, RequestSessionBean requestSessionBean) throws Exception {
+        Worker worker = requestSessionBean.getWorkerNeeded();
+        if (worker != null) {
+            Method targetMethod = worker.getHandlerMethod();
+            Parameter[] targetMethodParameters = targetMethod.getParameters();
+
+            List<Object> paramObjList = new ArrayList<>();
+            for (Parameter parameter : targetMethodParameters) {
+                IParameterResolver parameterResolver = ParameterResolverFactory.getResolverForParameter(parameter);
+                if (parameterResolver != null) {
+                    Object param = parameterResolver.resolve(requestSessionBean, parameter);
+                    paramObjList.add(param);
+                }
+            }
+
+        } else {
+            LOGGER.info("Worker miss matched in PostRequestHandler");
+        }
+    }
+
+    private static void handleJsonRequest(HttpServletRequest req, HttpServletResponse resp, RequestSessionBean requestSessionBean) throws Exception {
         Worker worker = requestSessionBean.getWorkerNeeded();
         if (worker != null) {
             String jsonStr = parseJsonString(req);
@@ -46,6 +78,7 @@ public class PostRequestHandler implements IRequestHandler {
             Method targetMethod = worker.getHandlerMethod();
 
             Parameter[] targetMethodParameters = targetMethod.getParameters();
+
 
             List<Object> paramObjList = new ArrayList<>();
             for (Parameter parameter : targetMethodParameters) {
@@ -68,7 +101,7 @@ public class PostRequestHandler implements IRequestHandler {
 
 
         } else {
-            LOGGER.info("Worker miss matched in GetRequestHandler");
+            LOGGER.info("Worker miss matched in PostRequestHandler");
         }
     }
 

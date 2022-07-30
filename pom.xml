@@ -91,6 +91,13 @@
             <version>0.10.2</version>
         </dependency>
 
+        <!-- file upload helper -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.4</version>
+        </dependency>
+
         <!-- validation -->
         <dependency>
             <groupId>javax.validation</groupId>
