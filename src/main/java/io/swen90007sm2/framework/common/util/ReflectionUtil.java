@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.validation.ConstraintViolationException;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Set;
 
@@ -54,6 +55,16 @@ public class ReflectionUtil {
             throw new RuntimeException(e);
         }
         return result;
+    }
+
+    public static void invokeMethodWithoutResult(Object targetObject, Method method, Object... args) {
+        try {
+            // invoke target method through reflection
+            method.invoke(targetObject, args);
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            LOGGER.error("invoke method failure, exception: ", e);
+            throw new RuntimeException(e);
+        }
     }
 
     /**

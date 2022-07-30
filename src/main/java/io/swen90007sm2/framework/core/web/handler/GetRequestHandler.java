@@ -55,14 +55,20 @@ public class GetRequestHandler implements IRequestHandler {
                 if (parameterResolver != null) {
                     Object paramObj = parameterResolver.resolve(requestSessionBean, param);
                     paramObjList.add(paramObj);
+
                 }
             }
 
             Object handlerBean = BeanManager.getBeanFromBeanMapByClass(worker.getHandlerClazz());
-            Object methodCallingResult = ReflectionUtil.invokeMethod(handlerBean, targetMethod, paramObjList.toArray());
 
             try {
-                IRequestHandler.respondRequestWithJson((R) methodCallingResult, resp);
+                if (targetMethod.getReturnType().equals(void.class)) {
+                    ReflectionUtil.invokeMethodWithoutResult(handlerBean, targetMethod, paramObjList.toArray());
+                    IRequestHandler.closeRequestConnection(resp);
+                } else {
+                    Object methodCallingResult = ReflectionUtil.invokeMethod(handlerBean, targetMethod, paramObjList.toArray());
+                    IRequestHandler.respondRequestWithJson((R) methodCallingResult, resp);
+                }
             } catch (IOException e) {
                 LOGGER.info("handleRestfulResponse IO err: ", e);
                 throw new RuntimeException(e);

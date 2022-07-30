@@ -24,4 +24,13 @@ public interface IRequestHandler {
             writer.close();
         }
     }
+
+    /**
+     * close the connection by close write stream.
+     */
+    static void closeRequestConnection (HttpServletResponse response) throws IOException {
+        PrintWriter writer = response.getWriter();
+        writer.flush();
+        writer.close();
+    }
 }

@@ -7,7 +7,6 @@ import io.swen90007sm2.framework.common.util.ReflectionUtil;
 import io.swen90007sm2.framework.core.ioc.BeanManager;
 import io.swen90007sm2.framework.core.mvc.factory.ParameterResolverFactory;
 import io.swen90007sm2.framework.core.mvc.resolver.IParameterResolver;
-import io.swen90007sm2.framework.exception.RequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,28 +28,24 @@ public class PostRequestHandler implements IRequestHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PostRequestHandler.class);
     public static final String APPLICATION_JSON = "application/json";
-    public static final String MULTIPART_FORM_DATA = "multipart/form-data";
 
     @Override
     public void handle(HttpServletRequest req, HttpServletResponse resp, RequestSessionBean requestSessionBean) throws Exception {
-        String requestPath = req.getServletPath();
 
-
-
-        if (req.getContentType().equals(APPLICATION_JSON)) {
+        if (req.getContentType() != null && req.getContentType().equals(APPLICATION_JSON)) {
             handleJsonRequest(req, resp, requestSessionBean);
 
-        } else if (req.getContentType().equals(MULTIPART_FORM_DATA)) {
-            // TODO 支持文件上传下载？？？ https://www.cnblogs.com/JiangLai/p/9579192.html
-            ;
-
         } else {
-            LOGGER.error("only receive application/json or multipart/form-data body in POST/PUT/DELETE, err path: [{}]: ", requestPath);
-            throw new RequestException("only receive application/json or multipart/form-data body in POST/PUT/DELETE");
+            // if request body is not JSON body, use basic handler
+            // expose HttpServletRequest and HttpServletResponse to handler parameter
+            handleBasicRequest(req, resp, requestSessionBean);
         }
     }
 
-    private static void handleFormDataRequest(HttpServletRequest req, HttpServletResponse resp, RequestSessionBean requestSessionBean) throws Exception {
+    /**
+     * handler with HttpServletRequest, HttpServletResponse param
+     */
+    private static void handleBasicRequest(HttpServletRequest req, HttpServletResponse resp, RequestSessionBean requestSessionBean) throws Exception {
         Worker worker = requestSessionBean.getWorkerNeeded();
         if (worker != null) {
             Method targetMethod = worker.getHandlerMethod();
@@ -63,6 +58,16 @@ public class PostRequestHandler implements IRequestHandler {
                     Object param = parameterResolver.resolve(requestSessionBean, parameter);
                     paramObjList.add(param);
                 }
+            }
+
+            Object handlerBean = BeanManager.getBeanFromBeanMapByClass(worker.getHandlerClazz());
+
+            if (targetMethod.getReturnType().equals(void.class)) {
+                ReflectionUtil.invokeMethodWithoutResult(handlerBean, targetMethod, paramObjList.toArray());
+                IRequestHandler.closeRequestConnection(resp);
+            } else {
+                Object methodCallingResult = ReflectionUtil.invokeMethod(handlerBean, targetMethod, paramObjList.toArray());
+                IRequestHandler.respondRequestWithJson((R) methodCallingResult, resp);
             }
 
         } else {
@@ -90,10 +95,15 @@ public class PostRequestHandler implements IRequestHandler {
             }
 
             Object handlerBean = BeanManager.getBeanFromBeanMapByClass(worker.getHandlerClazz());
-            Object methodCallingResult = ReflectionUtil.invokeMethod(handlerBean, targetMethod, paramObjList.toArray());
 
             try {
-                IRequestHandler.respondRequestWithJson((R) methodCallingResult, resp);
+                if (targetMethod.getReturnType().equals(void.class)) {
+                    ReflectionUtil.invokeMethodWithoutResult(handlerBean, targetMethod, paramObjList.toArray());
+                    IRequestHandler.closeRequestConnection(resp);
+                } else {
+                    Object methodCallingResult = ReflectionUtil.invokeMethod(handlerBean, targetMethod, paramObjList.toArray());
+                    IRequestHandler.respondRequestWithJson((R) methodCallingResult, resp);
+                }
             } catch (IOException e) {
                 LOGGER.info("handleRestfulResponse IO err: ", e);
                 throw new RuntimeException(e);
