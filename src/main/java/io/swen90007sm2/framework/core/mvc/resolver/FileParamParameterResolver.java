@@ -26,8 +26,6 @@ public class FileParamParameterResolver implements IParameterResolver {
             throw new RequestException("@FileParamParameter can only be used in post and multipart/form-data request.");
         }
 
-        //TODO
         return null;
-
     }
 }
