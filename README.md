@@ -6,7 +6,7 @@ A hand crafted light-weighted backend framework for SWEN90007 assignment project
 
 This Framework can help you to build up a RESTful web api server quickly.
 
-![98157e184b5f8561c9f7a10cdae7ba9](https://user-images.githubusercontent.com/69796042/181712544-d65bc85d-d7ba-4cc2-875e-af887a2b96b1.jpg)
+![f80d23254e95a2de8fce7f23a3c0f62](https://user-images.githubusercontent.com/69796042/182006586-c59c743f-4e98-47a6-ad69-c372088228b8.jpg)
 
 
 # Features
