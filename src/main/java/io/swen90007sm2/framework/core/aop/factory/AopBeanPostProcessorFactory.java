@@ -1,5 +1,6 @@
 package io.swen90007sm2.framework.core.aop.factory;
 
+import io.swen90007sm2.framework.core.aop.processor.ByteBuddyAopBeanProcessor;
 import io.swen90007sm2.framework.core.aop.processor.CgLibAopBeanProcessor;
 import io.swen90007sm2.framework.core.aop.processor.IBeanPostProcessor;
 import io.swen90007sm2.framework.core.aop.processor.JdkAopBeanProcessor;
@@ -20,7 +21,11 @@ public class AopBeanPostProcessorFactory {
         if (targetBean.isInterface() || targetBean.getInterfaces().length > 0) {
             return new JdkAopBeanProcessor();
         } else {
-            return new CgLibAopBeanProcessor();
+
+            // raplaced cglib to bytebuddy, because cglib can not support latest jdk
+            // and stopped maintain in 2019
+            return new ByteBuddyAopBeanProcessor();
+//            return new CgLibAopBeanProcessor();
         }
     }
 }
