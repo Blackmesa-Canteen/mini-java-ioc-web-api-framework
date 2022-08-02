@@ -16,6 +16,7 @@ This Framework can help you to build up a RESTful web api server quickly.
 - RESTful api
 - Annotation support for MVC: @Handler, @Blo, @Dao.
 - JSR303 Validation for Json Body parameter.
+- Filter for request, helpful in authorization.
 - Demo Configuration file support.
 - Demo CRUD template.
 
