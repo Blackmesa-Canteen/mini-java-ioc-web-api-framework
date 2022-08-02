@@ -1,9 +1,9 @@
 package org.example.filter;
 
 import com.alibaba.fastjson.JSON;
-import io.swen90007sm2.framework.annotation.filter.RequestFilter;
+import io.swen90007sm2.framework.annotation.filter.Filter;
 import io.swen90007sm2.framework.bean.R;
-import io.swen90007sm2.framework.core.web.filter.IRequestFilter;
+import io.swen90007sm2.framework.core.web.filter.IFilter;
 import org.apache.commons.lang3.StringUtils;
 import org.example.constant.StatusCodeEnume;
 
@@ -13,13 +13,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * @author 996Worker
+ * @author xiaotian
  * @description simulated https://blog.csdn.net/HLH_2021/article/details/119491890
  * @create 2022-08-02 23:44
  */
 
-@RequestFilter(name = "authFilter")
-public class AuthFilter implements IRequestFilter {
+@Filter(name = "authFilter")
+public class AuthFilter implements IFilter {
     @Override
     public boolean doFilter(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String token= request.getHeader("auth");

@@ -1,6 +1,6 @@
 package io.swen90007sm2.framework.core.web.filter;
 
-import io.swen90007sm2.framework.annotation.filter.RequestFilter;
+import io.swen90007sm2.framework.annotation.filter.Filter;
 import io.swen90007sm2.framework.common.util.ReflectionUtil;
 import io.swen90007sm2.framework.core.ioc.BeanManager;
 import io.swen90007sm2.framework.core.ioc.ClassManager;
@@ -12,22 +12,22 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @author 996Worker
+ * @author xiaotian
  * @description a manager holds all filter
  * @create 2022-08-02 22:46
  */
-public class RequestFilterManager {
+public class FilterManager {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BeanManager.class);
 
-    private static Map<String, IRequestFilter> FILTER_MAP;
+    private static Map<String, IFilter> FILTER_MAP;
 
     static {
         FILTER_MAP = new HashMap<>();
         Set<Class<?>> filterAnnotatedClassSet = ClassManager.getFilterAnnotatedClassSet();
         for (Class<?> filterClass : filterAnnotatedClassSet) {
-            IRequestFilter filterObj = (IRequestFilter) ReflectionUtil.genNewInstanceByClass(filterClass);
-            RequestFilter annotation = filterClass.getAnnotation(RequestFilter.class);
+            IFilter filterObj = (IFilter) ReflectionUtil.genNewInstanceByClass(filterClass);
+            Filter annotation = filterClass.getAnnotation(Filter.class);
             String filterName = annotation.name();
 
             if (FILTER_MAP.containsKey(filterName)) {
@@ -38,7 +38,7 @@ public class RequestFilterManager {
         }
     }
 
-    public static IRequestFilter getRequestFilterByName(String filterName) {
+    public static IFilter getRequestFilterByName(String filterName) {
         return FILTER_MAP.get(filterName);
     }
 }

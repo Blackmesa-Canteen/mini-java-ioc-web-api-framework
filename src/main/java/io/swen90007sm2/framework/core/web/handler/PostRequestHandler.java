@@ -1,6 +1,6 @@
 package io.swen90007sm2.framework.core.web.handler;
 
-import io.swen90007sm2.framework.annotation.filter.AppliesRequestFilter;
+import io.swen90007sm2.framework.annotation.filter.AppliesFilter;
 import io.swen90007sm2.framework.bean.R;
 import io.swen90007sm2.framework.bean.RequestSessionBean;
 import io.swen90007sm2.framework.bean.Worker;
@@ -8,8 +8,8 @@ import io.swen90007sm2.framework.common.util.ReflectionUtil;
 import io.swen90007sm2.framework.core.ioc.BeanManager;
 import io.swen90007sm2.framework.core.mvc.factory.ParameterResolverFactory;
 import io.swen90007sm2.framework.core.mvc.resolver.IParameterResolver;
-import io.swen90007sm2.framework.core.web.filter.IRequestFilter;
-import io.swen90007sm2.framework.core.web.filter.RequestFilterManager;
+import io.swen90007sm2.framework.core.web.filter.IFilter;
+import io.swen90007sm2.framework.core.web.filter.FilterManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,12 +55,12 @@ public class PostRequestHandler implements IRequestHandler {
             Method targetMethod = worker.getHandlerMethod();
 
             // perform request filter logic
-            if (targetMethod.isAnnotationPresent(AppliesRequestFilter.class)) {
-                AppliesRequestFilter annotation = targetMethod.getAnnotation(AppliesRequestFilter.class);
+            if (targetMethod.isAnnotationPresent(AppliesFilter.class)) {
+                AppliesFilter annotation = targetMethod.getAnnotation(AppliesFilter.class);
                 String[] filterNames = annotation.filterNames();
-                List<IRequestFilter> filterList = new LinkedList<>();
+                List<IFilter> filterList = new LinkedList<>();
                 for (String filterName : filterNames) {
-                    IRequestFilter filterObj = RequestFilterManager.getRequestFilterByName(filterName);
+                    IFilter filterObj = FilterManager.getRequestFilterByName(filterName);
                     if (filterObj != null) {
                         filterList.add(filterObj);
                     } else {
@@ -70,7 +70,7 @@ public class PostRequestHandler implements IRequestHandler {
 
                 }
 
-                for(IRequestFilter filter : filterList) {
+                for(IFilter filter : filterList) {
                     boolean passed = filter.doFilter(req, resp);
 
                     if (!passed) {

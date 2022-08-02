@@ -1,15 +1,14 @@
 package io.swen90007sm2.framework.core.ioc;
 
-import io.swen90007sm2.framework.annotation.filter.RequestFilter;
+import io.swen90007sm2.framework.annotation.filter.Filter;
 import io.swen90007sm2.framework.annotation.ioc.Component;
 import io.swen90007sm2.framework.annotation.mvc.Dao;
 import io.swen90007sm2.framework.annotation.mvc.Handler;
 import io.swen90007sm2.framework.annotation.mvc.Blo;
-import io.swen90007sm2.framework.common.util.ObjectUtil;
 import io.swen90007sm2.framework.common.util.ReflectionUtil;
 import io.swen90007sm2.framework.core.config.ConfigFileManager;
 import io.swen90007sm2.framework.common.util.ClassLoadUtil;
-import io.swen90007sm2.framework.core.web.filter.IRequestFilter;
+import io.swen90007sm2.framework.core.web.filter.IFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -98,9 +97,9 @@ public class ClassManager {
     public static Set<Class<?>> getFilterAnnotatedClassSet() {
         Set<Class<?>> set = new HashSet<>();
         for (Class<?> clazz : CLASS_SET) {
-            if (clazz.isAnnotationPresent(RequestFilter.class)) {
+            if (clazz.isAnnotationPresent(Filter.class)) {
 
-                if (!ReflectionUtil.isClassImplementedInterface(clazz, IRequestFilter.class)) {
+                if (!ReflectionUtil.isClassImplementedInterface(clazz, IFilter.class)) {
                     LOGGER.error("Filter annotated class [{}] does not implemented IRequestFilter interface",
                             clazz.getName());
                 } else {

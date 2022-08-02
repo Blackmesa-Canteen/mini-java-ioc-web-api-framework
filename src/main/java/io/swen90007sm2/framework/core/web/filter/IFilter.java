@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
  * a interface for request filter, can be used for login
  * @author xiaotian
  */
-public interface IRequestFilter {
+public interface IFilter {
     /**
      * filter the request
      * @param request incoming request

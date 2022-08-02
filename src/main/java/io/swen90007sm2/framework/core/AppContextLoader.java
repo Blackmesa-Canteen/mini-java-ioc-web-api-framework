@@ -1,6 +1,5 @@
 package io.swen90007sm2.framework.core;
 
-import io.swen90007sm2.framework.IocWebApiApplication;
 import io.swen90007sm2.framework.core.aop.InterceptorManager;
 import io.swen90007sm2.framework.core.config.ConfigFileManager;
 import io.swen90007sm2.framework.core.ioc.BeanManager;
@@ -8,8 +7,7 @@ import io.swen90007sm2.framework.core.ioc.ClassManager;
 import io.swen90007sm2.framework.core.ioc.InjectionHelper;
 import io.swen90007sm2.framework.core.mvc.HandlerManager;
 import io.swen90007sm2.framework.common.util.ClassLoadUtil;
-import io.swen90007sm2.framework.core.web.filter.RequestFilterManager;
-import io.swen90007sm2.framework.db.DbConnectionHelper;
+import io.swen90007sm2.framework.core.web.filter.FilterManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +35,7 @@ public class  AppContextLoader {
                 BeanManager.class,
                 InterceptorManager.class,
                 InjectionHelper.class,
-                RequestFilterManager.class,
+                FilterManager.class,
                 HandlerManager.class
         };
 
