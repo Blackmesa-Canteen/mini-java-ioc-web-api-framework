@@ -1,11 +1,15 @@
 package io.swen90007sm2.framework.core.ioc;
 
+import io.swen90007sm2.framework.annotation.filter.RequestFilter;
 import io.swen90007sm2.framework.annotation.ioc.Component;
 import io.swen90007sm2.framework.annotation.mvc.Dao;
 import io.swen90007sm2.framework.annotation.mvc.Handler;
 import io.swen90007sm2.framework.annotation.mvc.Blo;
+import io.swen90007sm2.framework.common.util.ObjectUtil;
+import io.swen90007sm2.framework.common.util.ReflectionUtil;
 import io.swen90007sm2.framework.core.config.ConfigFileManager;
 import io.swen90007sm2.framework.common.util.ClassLoadUtil;
+import io.swen90007sm2.framework.core.web.filter.IRequestFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -91,6 +95,24 @@ public class ClassManager {
         return set;
     }
 
+    public static Set<Class<?>> getFilterAnnotatedClassSet() {
+        Set<Class<?>> set = new HashSet<>();
+        for (Class<?> clazz : CLASS_SET) {
+            if (clazz.isAnnotationPresent(RequestFilter.class)) {
+
+                if (!ReflectionUtil.isClassImplementedInterface(clazz, IRequestFilter.class)) {
+                    LOGGER.error("Filter annotated class [{}] does not implemented IRequestFilter interface",
+                            clazz.getName());
+                } else {
+                    set.add(clazz);
+                }
+            }
+        }
+
+        LOGGER.info("Scanned {} Filter Classes.", set.size());
+        return set;
+    }
+
     /**
      * Component: beans need to be instantiated. a bean combination of Blo and Handler and Dao.
      */
@@ -125,7 +147,7 @@ public class ClassManager {
     }
 
     /**
-     * get class from his super class, used to hold class objects that are inhereted from a abstact class or interface
+     * get class from his super class, used to hold class objects that are inhereted from an abstact class or interface
      */
     public static Set<Class<?>> getClassSetBySuperClass(Class<?> superClass) {
         Set<Class<?>> set = new HashSet<>();

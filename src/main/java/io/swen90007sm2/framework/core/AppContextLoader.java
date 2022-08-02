@@ -8,6 +8,7 @@ import io.swen90007sm2.framework.core.ioc.ClassManager;
 import io.swen90007sm2.framework.core.ioc.InjectionHelper;
 import io.swen90007sm2.framework.core.mvc.HandlerManager;
 import io.swen90007sm2.framework.common.util.ClassLoadUtil;
+import io.swen90007sm2.framework.core.web.filter.RequestFilterManager;
 import io.swen90007sm2.framework.db.DbConnectionHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +37,7 @@ public class  AppContextLoader {
                 BeanManager.class,
                 InterceptorManager.class,
                 InjectionHelper.class,
+                RequestFilterManager.class,
                 HandlerManager.class
         };
 

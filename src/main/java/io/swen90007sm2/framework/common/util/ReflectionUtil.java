@@ -93,6 +93,10 @@ public class ReflectionUtil {
     public static <T> Set<Class<? extends T>> getSubClass(String packageName, Class<T> interfaceClass) {
         Reflections reflections = new Reflections(packageName);
         return reflections.getSubTypesOf(interfaceClass);
-
     }
+
+    public static boolean isClassImplementedInterface(Class<?> clazz, Class<?> theInterface) {
+        return theInterface.isAssignableFrom(clazz);
+    }
+
 }

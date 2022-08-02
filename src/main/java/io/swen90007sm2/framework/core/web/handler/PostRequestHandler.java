@@ -1,5 +1,6 @@
 package io.swen90007sm2.framework.core.web.handler;
 
+import io.swen90007sm2.framework.annotation.filter.AppliesRequestFilter;
 import io.swen90007sm2.framework.bean.R;
 import io.swen90007sm2.framework.bean.RequestSessionBean;
 import io.swen90007sm2.framework.bean.Worker;
@@ -7,6 +8,8 @@ import io.swen90007sm2.framework.common.util.ReflectionUtil;
 import io.swen90007sm2.framework.core.ioc.BeanManager;
 import io.swen90007sm2.framework.core.mvc.factory.ParameterResolverFactory;
 import io.swen90007sm2.framework.core.mvc.resolver.IParameterResolver;
+import io.swen90007sm2.framework.core.web.filter.IRequestFilter;
+import io.swen90007sm2.framework.core.web.filter.RequestFilterManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +20,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -49,6 +53,35 @@ public class PostRequestHandler implements IRequestHandler {
         Worker worker = requestSessionBean.getWorkerNeeded();
         if (worker != null) {
             Method targetMethod = worker.getHandlerMethod();
+
+            // perform request filter logic
+            if (targetMethod.isAnnotationPresent(AppliesRequestFilter.class)) {
+                AppliesRequestFilter annotation = targetMethod.getAnnotation(AppliesRequestFilter.class);
+                String[] filterNames = annotation.filterNames();
+                List<IRequestFilter> filterList = new LinkedList<>();
+                for (String filterName : filterNames) {
+                    IRequestFilter filterObj = RequestFilterManager.getRequestFilterByName(filterName);
+                    if (filterObj != null) {
+                        filterList.add(filterObj);
+                    } else {
+                        LOGGER.error("Filter [{}] not found on method [{}]",
+                                filterName, targetMethod.getName());
+                    }
+
+                }
+
+                for(IRequestFilter filter : filterList) {
+                    boolean passed = filter.doFilter(req, resp);
+
+                    if (!passed) {
+                        LOGGER.info("Didn't pass request filter: [{}]", filter.getClass().getName());
+                        IRequestHandler.closeRequestConnection(resp);
+                        return;
+                    }
+                    LOGGER.info("passed request filter: [{}]", filter.getClass().getName());
+                }
+            }
+
             Parameter[] targetMethodParameters = targetMethod.getParameters();
 
             List<Object> paramObjList = new ArrayList<>();
