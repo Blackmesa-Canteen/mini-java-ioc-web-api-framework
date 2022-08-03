@@ -4,7 +4,6 @@ import io.swen90007sm2.framework.common.util.BannerUtil;
 import io.swen90007sm2.framework.common.util.LogUtil;
 import io.swen90007sm2.framework.core.AppContextLoader;
 import io.swen90007sm2.framework.core.web.TomcatServer;
-import io.swen90007sm2.framework.db.DbConnectionHelper;
 import org.apache.catalina.LifecycleException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,9 +34,6 @@ public class IocWebApiApplication {
 
         // load core modules
         AppContextLoader.initAppContext();
-
-        // load db connection
-//        DbConnectionHelper.getDbConnection();
 
         LOGGER.info("Startup the web server...");
         // start server

@@ -20,7 +20,7 @@ import java.util.Set;
  * a helper to hold all class objects
  *
  * @author xiaotian
- * @author tyshawnlee https://github.com/tyshawnlee/handwritten-mvc
+ * @author tyshawnlee https://github.com/tyshawnlee
  */
 public class ClassManager {
 

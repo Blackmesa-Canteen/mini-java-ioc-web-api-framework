@@ -14,6 +14,8 @@ import java.lang.reflect.Parameter;
  *
  * @author xiaotian
  */
+
+@Deprecated
 public class FileParamParameterResolver implements IParameterResolver {
 
     public static final String MULTIPART_FORM_DATA = "multipart/form-data";

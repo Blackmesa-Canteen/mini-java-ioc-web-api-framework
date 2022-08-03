@@ -15,7 +15,7 @@ import java.util.Set;
  * By default, the bean scope is singleton only...
  *
  * @author xiaotian
- * @author tyshawnlee https://github.com/tyshawnlee/handwritten-mvc
+ * @author tyshawnlee https://github.com/tyshawnlee
  */
 public class BeanManager {
 
